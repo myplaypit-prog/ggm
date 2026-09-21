@@ -1,0 +1,114 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------
+   만물마켓 디자인 토큰
+   오렌지(당근빛 carrot) + 그린(새싹빛 leaf) 을 메인으로,
+   크림색 종이 배경 위에 동글동글한 요소들을 올립니다.
+------------------------------------------------------------------- */
+@theme {
+  /* 메인 오렌지 */
+  --color-carrot-50: #fff4ea;
+  --color-carrot-100: #ffe7d1;
+  --color-carrot-200: #ffd0a8;
+  --color-carrot-300: #ffb474;
+  --color-carrot-400: #ff9445;
+  --color-carrot-500: #ff7a1a;
+  --color-carrot-600: #f06000;
+  --color-carrot-700: #c74d00;
+  --color-carrot-800: #9c3e06;
+  --color-carrot-900: #7d340b;
+
+  /* 서브 그린 */
+  --color-leaf-50: #f1faf0;
+  --color-leaf-100: #ddf3da;
+  --color-leaf-200: #bce6b6;
+  --color-leaf-300: #92d489;
+  --color-leaf-400: #66be5c;
+  --color-leaf-500: #43a63c;
+  --color-leaf-600: #2f8a2c;
+  --color-leaf-700: #276e26;
+  --color-leaf-800: #235823;
+  --color-leaf-900: #1e491f;
+
+  /* 포인트 컬러칩 */
+  --color-cream: #fff9f0;
+  --color-paper: #fffdf9;
+  --color-ink: #3b2c21;
+  --color-ink-soft: #8a7565;
+  --color-sky: #7fc8e8;
+  --color-berry: #ff6b8a;
+  --color-sun: #ffd24c;
+  --color-grape: #b08ae0;
+
+  /* 폰트 (layout.tsx 의 next/font 변수와 연결) */
+  --font-display: var(--font-jua), "Apple SD Gothic Neo", sans-serif;
+  --font-sans: var(--font-noto), "Apple SD Gothic Neo", sans-serif;
+
+  /* 동글동글한 반경 */
+  --radius-blob: 2rem;
+
+  /* 애니메이션 */
+  --animate-float: float 4s ease-in-out infinite;
+  --animate-wiggle: wiggle 2.5s ease-in-out infinite;
+  --animate-pop: pop 0.35s ease-out;
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  @keyframes wiggle {
+    0%, 100% { transform: rotate(-3deg); }
+    50% { transform: rotate(3deg); }
+  }
+  @keyframes pop {
+    0% { transform: scale(0.94); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: var(--color-cream);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    /* 은은한 점무늬 배경 */
+    background-image:
+      radial-gradient(var(--color-carrot-100) 1.5px, transparent 1.6px),
+      radial-gradient(var(--color-leaf-100) 1.5px, transparent 1.6px);
+    background-size: 36px 36px, 36px 36px;
+    background-position: 0 0, 18px 18px;
+  }
+  h1, h2, h3, .font-display {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+  }
+  /* 포커스 링도 브랜드 컬러로 */
+  :focus-visible {
+    outline: 3px solid var(--color-carrot-400);
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  /* 살짝 떠 있는 카드 */
+  .card-soft {
+    background: var(--color-paper);
+    border: 2px solid var(--color-carrot-100);
+    border-radius: var(--radius-blob);
+    box-shadow: 0 10px 0 -4px var(--color-carrot-100), 0 18px 30px -18px rgba(59, 44, 33, 0.35);
+  }
+  /* 꾹 눌리는 느낌의 버튼 */
+  .btn-squish {
+    transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
+  }
+  .btn-squish:hover {
+    filter: brightness(1.04);
+  }
+  .btn-squish:active {
+    transform: translateY(3px);
+    box-shadow: none !important;
+  }
+}
