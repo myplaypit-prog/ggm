@@ -190,7 +190,9 @@ export default async function HomePage({
         </div>
 
         <div className="flex justify-center lg:justify-end">
-          <span className="animate-float block w-full max-w-[440px]">
+          {/* 태블릿 폭에서는 그림이 너무 커서 첫 화면을 다 차지해요.
+              화면이 넓어질수록 조금씩 키웁니다. */}
+          <span className="animate-float block w-full max-w-[320px] sm:max-w-[360px] lg:max-w-[440px]">
             <CatWithBox size={440} className="h-auto w-full" />
           </span>
         </div>

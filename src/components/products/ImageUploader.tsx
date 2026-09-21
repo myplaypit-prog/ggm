@@ -76,9 +76,9 @@ export function ImageUploader({
 
   return (
     <div>
-      <span className="mb-2 flex items-baseline gap-2 text-sm font-medium text-ink">
+      <span className="mb-2 flex items-baseline gap-2 text-sm font-semibold text-ink">
         사진
-        <span className="text-xs font-normal text-ink-soft">
+        <span className="text-xs font-normal text-ink-faint">
           {paths.length} / {MAX_IMAGES} · 첫 번째 사진이 대표 사진이 돼요
         </span>
       </span>
@@ -87,52 +87,76 @@ export function ImageUploader({
         <input key={p} type="hidden" name="images" value={p} />
       ))}
 
-      <div className="flex flex-wrap gap-2.5">
-        {/* 추가 버튼 */}
+      {/* 사진이 하나도 없을 때는 큼직한 안내판으로.
+          사진이 제일 중요한 입력인데 작은 네모 하나면 눈에 안 띄어요.
+          한 장이라도 올라가면 그때부터는 작은 "+" 칸으로 바뀝니다. */}
+      {paths.length === 0 ? (
         <button
           type="button"
           onClick={() => inputRef.current?.click()}
-          disabled={busy || paths.length >= MAX_IMAGES}
-          className="btn-squish grid size-24 shrink-0 place-items-center rounded-2xl border border-dashed border-carrot-300 bg-carrot-50 text-carrot-600 transition hover:border-carrot-400 disabled:cursor-not-allowed disabled:opacity-50"
+          disabled={busy}
+          className="btn-squish grid w-full place-items-center rounded-2xl border border-dashed border-carrot-300 bg-carrot-50/70 px-6 py-10 text-carrot-700 transition hover:border-carrot-400 hover:bg-carrot-50 disabled:cursor-not-allowed disabled:opacity-50"
         >
           {busy ? (
-            <LoaderIcon size={24} className="animate-spin" />
+            <LoaderIcon size={28} className="animate-spin" />
           ) : (
-            <span className="flex flex-col items-center gap-1">
-              <CatFace size={38} color="orange" mood="wow" />
-              <span className="text-[11px] font-bold">사진 넣기</span>
+            <span className="flex flex-col items-center gap-2">
+              <CatFace size={64} color="orange" mood="wow" />
+              <span className="text-[15px] font-bold">사진 넣기</span>
+              <span className="text-xs font-medium text-ink-faint">
+                JPG · PNG · WEBP · GIF / 최대 {MAX_IMAGES}장
+              </span>
             </span>
           )}
         </button>
-
-        {/* 올라간 사진들 */}
-        {paths.map((path, i) => (
-          <div
-            key={path}
-            className="relative size-24 shrink-0 overflow-hidden rounded-2xl border border-sand-200 bg-carrot-50"
+      ) : (
+        <div className="flex flex-wrap gap-2.5">
+          {/* 추가 버튼 */}
+          <button
+            type="button"
+            onClick={() => inputRef.current?.click()}
+            disabled={busy || paths.length >= MAX_IMAGES}
+            className="btn-squish grid size-24 shrink-0 place-items-center rounded-2xl border border-dashed border-carrot-300 bg-carrot-50 text-carrot-600 transition hover:border-carrot-400 disabled:cursor-not-allowed disabled:opacity-50"
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={productImageUrl(path)}
-              alt={`상품 사진 ${i + 1}`}
-              className="size-full object-cover"
-            />
-            {i === 0 && (
-              <span className="absolute bottom-0 inset-x-0 bg-carrot-500/90 py-0.5 text-center text-[10px] font-bold text-white">
-                대표
+            {busy ? (
+              <LoaderIcon size={24} className="animate-spin" />
+            ) : (
+              <span className="flex flex-col items-center gap-1">
+                <span className="text-2xl leading-none">+</span>
+                <span className="text-[11px] font-bold">사진 추가</span>
               </span>
             )}
-            <button
-              type="button"
-              onClick={() => removeAt(i)}
-              aria-label={`사진 ${i + 1} 빼기`}
-              className="absolute right-1 top-1 grid size-6 place-items-center rounded-full bg-ink/70 text-sm leading-none text-white transition hover:bg-berry"
+          </button>
+
+          {/* 올라간 사진들 */}
+          {paths.map((path, i) => (
+            <div
+              key={path}
+              className="relative size-24 shrink-0 overflow-hidden rounded-2xl border border-sand-200 bg-sand-100"
             >
-              ×
-            </button>
-          </div>
-        ))}
-      </div>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={productImageUrl(path)}
+                alt={`상품 사진 ${i + 1}`}
+                className="size-full object-cover"
+              />
+              {i === 0 && (
+                <span className="absolute inset-x-0 bottom-0 bg-carrot-500/90 py-0.5 text-center text-[10px] font-bold text-white">
+                  대표
+                </span>
+              )}
+              <button
+                type="button"
+                onClick={() => removeAt(i)}
+                aria-label={`사진 ${i + 1} 빼기`}
+                className="absolute right-1 top-1 grid size-6 place-items-center rounded-full bg-ink/70 text-sm leading-none text-white transition hover:bg-berry"
+              >
+                ×
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
 
       <input
         ref={inputRef}

@@ -27,7 +27,7 @@ export function ChipGroup({
 
   return (
     <div>
-      <span className="mb-2 block text-sm font-medium text-ink">{label}</span>
+      <span className="mb-2 block text-sm font-semibold text-ink">{label}</span>
       <input type="hidden" name={name} value={selected} />
 
       <div className={columns === "grid" ? "grid grid-cols-2 gap-2 sm:grid-cols-4" : "flex flex-wrap gap-2"}>
@@ -39,15 +39,15 @@ export function ChipGroup({
               type="button"
               onClick={() => setSelected(opt.key)}
               aria-pressed={on}
-              className={`btn-squish rounded-2xl border px-3.5 py-2.5 text-left text-sm transition ${
+              className={`btn-squish rounded-xl border px-3.5 py-2.5 text-left text-sm transition ${
                 on
-                  ? "border-carrot-500 bg-carrot-50 font-bold text-carrot-700 shadow-[0_0_0_3px_rgba(251,95,19,0.14)]"
-                  : "border-sand-200 bg-paper text-ink-soft hover:border-carrot-300"
+                  ? "border-carrot-400 bg-carrot-50 font-bold text-carrot-700 shadow-[0_0_0_3px_rgba(251,95,19,0.14)]"
+                  : "border-sand-200 bg-paper text-ink hover:border-sand-300 hover:bg-sand-50"
               }`}
             >
               <span className="block">{opt.label}</span>
               {opt.hint && (
-                <span className="mt-0.5 block text-[11px] font-normal text-ink-soft/80">
+                <span className="mt-0.5 block text-[11px] font-normal text-ink-faint">
                   {opt.hint}
                 </span>
               )}
@@ -56,7 +56,7 @@ export function ChipGroup({
         })}
       </div>
 
-      {error && <span className="mt-1.5 block text-xs font-medium text-berry">{error}</span>}
+      {error && <span className="mt-1.5 block text-xs font-semibold text-berry-ink">{error}</span>}
     </div>
   );
 }

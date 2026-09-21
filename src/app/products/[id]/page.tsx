@@ -89,7 +89,10 @@ export default async function ProductDetailPage({
       <div className="grid gap-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
         <ProductGallery images={product.images} title={product.title} />
 
-        <div>
+        {/* 오른쪽 "구매 패널".
+            테두리를 둘러 하나의 덩어리로 보이게 했어요.
+            (그냥 글자만 있으면 사진 옆이 휑해 보입니다) */}
+        <div className="card-soft h-fit p-6 sm:p-7">
           <div className="flex flex-wrap items-center gap-2">
             <span
               className={`rounded-full px-2.5 py-1 text-xs font-bold ${categoryChip(product.category)}`}
@@ -106,9 +109,13 @@ export default async function ProductDetailPage({
             </span>
           </div>
 
-          <h1 className="mt-3 font-display text-3xl leading-snug text-ink">{product.title}</h1>
+          <h1 className="mt-3 text-[1.6rem] leading-snug text-ink">{product.title}</h1>
 
-          <p className="mt-2 font-display text-4xl text-carrot-600">
+          <p
+            className={`tabular mt-2 font-display text-[2.25rem] ${
+              product.price === 0 ? "text-carrot-500" : "text-ink"
+            }`}
+          >
             {formatPrice(product.price)}
           </p>
 
@@ -120,7 +127,7 @@ export default async function ProductDetailPage({
           </p>
 
           {/* 판매자 */}
-          <div className="mt-6 flex items-center gap-3 rounded-3xl border border-sand-200 bg-paper px-4 py-3.5">
+          <div className="mt-6 flex items-center gap-3 rounded-2xl border border-sand-200 bg-sand-50 px-4 py-3.5">
             <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-carrot-50">
               <CatFace
                 size={40}
@@ -141,20 +148,8 @@ export default async function ProductDetailPage({
             )}
           </div>
 
-          {/* 설명 */}
-          <div className="mt-6">
-            <h2 className="mb-2 font-display text-xl text-ink">상품 설명</h2>
-            {product.description ? (
-              <p className="whitespace-pre-wrap text-[15px] leading-relaxed text-ink">
-                {product.description}
-              </p>
-            ) : (
-              <p className="text-sm text-ink-soft">설명 없이 올라온 물건이에요.</p>
-            )}
-          </div>
-
           {/* 조작 영역 */}
-          <div className="mt-8">
+          <div className="mt-6">
             {isOwner ? (
               <div className="grid gap-4 rounded-3xl border border-dashed border-sand-200 bg-carrot-50/60 p-5">
                 <StatusSelect id={product.id} current={product.status} />
@@ -192,6 +187,19 @@ export default async function ProductDetailPage({
           </div>
         </div>
       </div>
+
+      {/* 상품 설명 — 사진 아래 전체 폭으로.
+          오른쪽 구매 패널 안에 있을 때는 좁아서 읽기 불편했어요. */}
+      <section className="mt-10 max-w-2xl">
+        <h2 className="text-xl text-ink">상품 설명</h2>
+        {product.description ? (
+          <p className="mt-3 whitespace-pre-wrap text-[16px] leading-[1.8] text-ink-soft">
+            {product.description}
+          </p>
+        ) : (
+          <p className="mt-3 text-[15px] text-ink-faint">설명 없이 올라온 물건이에요.</p>
+        )}
+      </section>
 
       {/* 같은 판매자의 다른 물건 */}
       {others && others.length > 0 && (

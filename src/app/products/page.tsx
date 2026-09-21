@@ -56,13 +56,14 @@ export default async function ProductsPage({
       {/* 머리말 */}
       <div className="mb-7 flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h1 className="flex items-center gap-2 font-display text-3xl text-ink">
-            <PawPrint size={26} className="text-carrot-400" />
-            {category ? categoryLabel(category) : "만물 구경하기"}
+          <h1 className="flex items-center gap-2 text-[2rem] text-ink">
+            <PawPrint size={24} className="text-carrot-400" />
+            {q ? `"${q}" 검색 결과` : category ? categoryLabel(category) : "만물 구경하기"}
           </h1>
           <p className="mt-1.5 text-sm text-ink-soft">
-            {q ? `"${q}" 검색 결과 ` : ""}
-            지금 {products.length}개의 물건이 주인을 기다리고 있어요.
+            {products.length > 0
+              ? `${products.length}개의 물건이 주인을 기다리고 있어요.`
+              : "조건에 맞는 물건이 아직 없어요."}
           </p>
         </div>
 
@@ -82,20 +83,51 @@ export default async function ProductsPage({
           목록을 불러오지 못했어요: {error.message}
         </p>
       ) : products.length === 0 ? (
-        <div className="mt-12 rounded-blob border border-dashed border-sand-200 bg-paper/70 px-6 py-16 text-center">
-          <CatFace size={110} color="cream" mood="sleepy" className="mx-auto animate-float" />
-          <h2 className="mt-4 font-display text-2xl text-ink">아직 아무것도 없어요</h2>
-          <p className="mt-2 text-sm text-ink-soft">
-            {q || category
-              ? "다른 조건으로 찾아보시겠어요?"
-              : "첫 번째 물건을 올려 주실래요? 뭐든 괜찮아요!"}
-          </p>
-          <Link
-            href="/products/new"
-            className="btn-squish mt-6 inline-flex btn-primary rounded-xl px-5 py-3 text-[15px] font-bold"
-          >
-            물건 올리러 가기
-          </Link>
+        /* 빈 화면은 두 경우를 나눠서 안내합니다.
+           ① 검색·필터 때문에 비었을 때  → 조건을 푸는 버튼을 줘야 해요
+           ② 진짜로 물건이 하나도 없을 때 → 올리러 가는 버튼을 줘야 하고요
+           이걸 구분 안 하면 "우주선 검색 결과 없음" 화면에서
+           엉뚱하게 "물건 올리러 가기" 만 보여 주게 됩니다. */
+        <div className="mt-12 rounded-blob border border-dashed border-sand-300 bg-paper px-6 py-16 text-center">
+          <CatFace size={104} color="cream" mood="sleepy" className="mx-auto animate-float" />
+
+          {q || category ? (
+            <>
+              <h2 className="mt-4 text-[1.4rem] text-ink">
+                {q ? `"${q}"에 맞는 물건이 없네요` : "이 카테고리는 아직 비어 있어요"}
+              </h2>
+              <p className="mt-2 text-sm text-ink-soft">
+                검색어를 바꾸거나, 전체 목록에서 둘러보세요.
+              </p>
+              <div className="mt-6 flex flex-wrap justify-center gap-2.5">
+                <Link
+                  href="/products"
+                  className="btn-squish btn-primary inline-flex rounded-xl px-5 py-3 text-[15px] font-bold"
+                >
+                  전체 물건 보기
+                </Link>
+                <Link
+                  href="/products/new"
+                  className="btn-squish btn-outline inline-flex rounded-xl px-5 py-3 text-[15px] font-bold"
+                >
+                  내가 올리기
+                </Link>
+              </div>
+            </>
+          ) : (
+            <>
+              <h2 className="mt-4 text-[1.4rem] text-ink">아직 아무것도 없어요</h2>
+              <p className="mt-2 text-sm text-ink-soft">
+                첫 번째 물건을 올려 주실래요? 뭐든 괜찮아요!
+              </p>
+              <Link
+                href="/products/new"
+                className="btn-squish btn-primary mt-6 inline-flex rounded-xl px-5 py-3 text-[15px] font-bold"
+              >
+                물건 올리러 가기
+              </Link>
+            </>
+          )}
         </div>
       ) : (
         <ul className="mt-7 grid grid-cols-2 gap-4 lg:grid-cols-4">

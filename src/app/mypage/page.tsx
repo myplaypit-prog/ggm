@@ -81,82 +81,64 @@ export default async function MyPage({
         </div>
       )}
 
-      {/* 프로필 카드 */}
-      <section className="card-soft relative overflow-hidden p-7 sm:p-9">
+      {/* ── 프로필 ────────────────────────────────────
+          예전에는 이 카드 하나에 프로필·숫자·버튼 세 가지를 다 우겨넣어
+          어디를 봐야 할지 알기 어려웠어요. 세 덩어리로 나눴습니다. */}
+      <section className="card-soft relative overflow-hidden p-7 sm:p-8">
         <PawPrint
-          size={140}
-          className="pointer-events-none absolute -right-6 -top-8 rotate-12 text-carrot-50"
+          size={150}
+          className="pointer-events-none absolute -right-8 -top-10 rotate-12 text-carrot-50"
         />
 
-        <div className="relative flex flex-col items-center gap-6 sm:flex-row sm:items-start">
-          <div className="grid size-28 shrink-0 place-items-center rounded-3xl border border-sand-200 bg-carrot-50">
-            <CatFace size={104} color={avatarKey} mood="happy" className="animate-float" />
+        <div className="relative flex flex-col items-center gap-5 text-center sm:flex-row sm:items-center sm:gap-6 sm:text-left">
+          <div className="grid size-24 shrink-0 place-items-center rounded-3xl border border-sand-200 bg-carrot-50">
+            <CatFace size={88} color={avatarKey} mood="happy" />
           </div>
 
-          <div className="flex-1 text-center sm:text-left">
-            <span className="chip bg-carrot-100 text-carrot-700">
-              {CAT_COLORS[avatarKey].name} 이웃 · {CAT_COLORS[avatarKey].tagline}
+          <div className="min-w-0 flex-1">
+            <span className="chip bg-carrot-50 text-carrot-700">
+              {CAT_COLORS[avatarKey].name} · {CAT_COLORS[avatarKey].tagline}
             </span>
-
-            <h1 className="mt-3 text-[2rem] text-ink">{nickname}</h1>
-
-            <dl className="mt-4 grid gap-2 text-sm text-ink-soft sm:max-w-sm">
-              <div className="flex items-center justify-center gap-2 sm:justify-start">
-                <MailIcon size={17} className="text-ink-faint" />
-                <dd className="truncate">{user.email}</dd>
-              </div>
-              <div className="flex items-center justify-center gap-2 sm:justify-start">
-                <PinIcon size={17} className="text-carrot-400" />
-                <dd>{region}</dd>
-              </div>
-              <div className="flex items-center justify-center gap-2 sm:justify-start">
-                <SparkleIcon size={17} className="text-sun" />
-                <dd>{joinedAt} 가입</dd>
-              </div>
-            </dl>
-
-            {/* 판매 요약 */}
-            <div className="mt-5 flex justify-center gap-2.5 sm:justify-start">
-              <span className="rounded-xl border border-sand-200 bg-paper px-4 py-2.5 text-center">
-                <span className="tabular block font-display text-xl text-carrot-600">{sellingCount}</span>
-                <span className="text-[11px] font-medium text-ink-faint">판매중</span>
+            <h1 className="mt-2.5 truncate text-[1.9rem] text-ink">{nickname}</h1>
+            <p className="mt-1 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[13px] text-ink-faint sm:justify-start">
+              <span className="inline-flex items-center gap-1">
+                <PinIcon size={14} />
+                {region}
               </span>
-              <span className="rounded-xl border border-sand-200 bg-paper px-4 py-2.5 text-center">
-                <span className="tabular block font-display text-xl text-leaf-600">{soldCount}</span>
-                <span className="text-[11px] font-medium text-ink-faint">판매완료</span>
+              <span className="inline-flex items-center gap-1">
+                <MailIcon size={14} />
+                <span className="max-w-[14rem] truncate">{user.email}</span>
               </span>
-              <span className="rounded-xl border border-sand-200 bg-paper px-4 py-2.5 text-center">
-                <span className="tabular block font-display text-xl text-ink">{myProducts.length}</span>
-                <span className="text-[11px] font-medium text-ink-faint">전체</span>
+              <span className="inline-flex items-center gap-1">
+                <SparkleIcon size={14} />
+                {joinedAt} 가입
               </span>
-            </div>
-
-            <div className="mt-6 flex flex-wrap justify-center gap-2.5 sm:justify-start">
-              <Link
-                href="/products/new"
-                className="btn-squish btn-primary flex items-center gap-1.5 rounded-xl px-5 py-2.5 text-[15px] font-bold"
-              >
-                <TagIcon size={17} />
-                물건 팔기
-              </Link>
-              <Link
-                href="/products"
-                className="btn-squish btn-outline rounded-xl px-5 py-2.5 text-[15px] font-bold"
-              >
-                만물 구경하기
-              </Link>
-              <form action={signOutAction}>
-                <button
-                  type="submit"
-                  className="btn-squish flex items-center gap-1.5 rounded-xl border border-sand-200 bg-paper px-5 py-2.5 text-[15px] font-bold text-ink-soft shadow-xs hover:border-sand-300 hover:text-ink"
-                >
-                  <LogoutIcon size={17} />
-                  로그아웃
-                </button>
-              </form>
-            </div>
+            </p>
           </div>
+
+          {/* 가장 하고 싶은 일 하나만 크게 */}
+          <Link
+            href="/products/new"
+            className="btn-squish btn-primary inline-flex shrink-0 items-center gap-1.5 rounded-xl px-5 py-3 text-[15px] font-bold"
+          >
+            <TagIcon size={17} />
+            물건 팔기
+          </Link>
         </div>
+
+        {/* 판매 요약 — 숫자를 크게 키워 한눈에 */}
+        <dl className="hairline mt-7 grid grid-cols-3 gap-px overflow-hidden pt-7">
+          {[
+            { label: "판매중", value: sellingCount, tone: "text-carrot-500" },
+            { label: "판매완료", value: soldCount, tone: "text-leaf-600" },
+            { label: "전체", value: myProducts.length, tone: "text-ink" },
+          ].map((s, i) => (
+            <div key={s.label} className={i > 0 ? "border-l border-sand-200 text-center" : "text-center"}>
+              <dd className={`tabular font-display text-[2rem] leading-none ${s.tone}`}>{s.value}</dd>
+              <dt className="mt-1.5 text-xs font-semibold text-ink-faint">{s.label}</dt>
+            </div>
+          ))}
+        </dl>
       </section>
 
       {/* 내가 올린 물건 */}
@@ -214,13 +196,28 @@ export default async function MyPage({
                 <p className="text-[17px] text-ink">{title}</p>
                 <p className="truncate text-sm text-ink-soft">{desc}</p>
               </div>
-              <span className="ml-auto shrink-0 rounded-full bg-carrot-50 px-2.5 py-1 text-[11px] font-bold text-carrot-600">
+              <span className="ml-auto shrink-0 rounded-full bg-sand-100 px-2.5 py-1 text-[11px] font-bold text-ink-faint">
                 준비 중
               </span>
             </li>
           ))}
         </ul>
       </section>
+
+      {/* ── 로그아웃 ──────────────────────────────────
+          자주 쓰는 버튼이 아니라서 맨 아래에 작게 뒀어요.
+          위쪽 "물건 팔기" 와 나란히 두면 실수로 누르기 쉽습니다. */}
+      <div className="hairline mt-14 pt-6 text-center">
+        <form action={signOutAction}>
+          <button
+            type="submit"
+            className="btn-squish inline-flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-semibold text-ink-faint transition hover:bg-sand-100 hover:text-ink"
+          >
+            <LogoutIcon size={16} />
+            로그아웃
+          </button>
+        </form>
+      </div>
     </div>
   );
 }
