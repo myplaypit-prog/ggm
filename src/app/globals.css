@@ -1,60 +1,102 @@
 @import "tailwindcss";
 
-/* ------------------------------------------------------------------
-   만물마켓 디자인 토큰
-   오렌지(당근빛 carrot) + 그린(새싹빛 leaf) 을 메인으로,
-   크림색 종이 배경 위에 동글동글한 요소들을 올립니다.
-------------------------------------------------------------------- */
+/* ==================================================================
+   만물마켓 디자인 토큰 (2차 정리)
+
+   색을 쓰는 원칙 — "주인공은 오렌지 하나"
+   1) 오렌지(carrot)  : 브랜드. 버튼·로고·강조처럼 "누르고 싶은 것"에만.
+   2) 모래/크림(sand) : 배경과 테두리. 화면의 90%는 이 따뜻한 중립색.
+   3) 포인트 4색      : 각자 역할이 정해져 있고, 작게 조금씩만 씁니다.
+        - leaf(세이지 그린) : 안전 · 완료 · 성공
+        - sun (골드)        : 축하 · 강조 하이라이트
+        - sky (틸블루)      : 정보 · 디지털 (오렌지의 보색이라 시원한 대비)
+        - berry(라즈베리)   : 찜 · 하트 · 에러
+        - grape(라일락)     : 취향 · 문화 카테고리
+   4) 색마다 "-soft(연한 배경)" 와 "-ink(그 위에 얹는 글자색)" 를 짝으로 둡니다.
+      → 이렇게 해두면 JSX 안에 #2b7fa3 같은 임의 색을 적을 일이 없습니다.
+================================================================== */
 @theme {
-  /* 메인 오렌지 */
-  --color-carrot-50: #fff4ea;
-  --color-carrot-100: #ffe7d1;
-  --color-carrot-200: #ffd0a8;
-  --color-carrot-300: #ffb474;
-  --color-carrot-400: #ff9445;
-  --color-carrot-500: #ff7a1a;
-  --color-carrot-600: #f06000;
-  --color-carrot-700: #c74d00;
-  --color-carrot-800: #9c3e06;
-  --color-carrot-900: #7d340b;
+  /* ── 1. 메인 오렌지 ────────────────────────────── */
+  --color-carrot-50: #fff7f0;
+  --color-carrot-100: #ffe9d7;
+  --color-carrot-200: #ffd3ac;
+  --color-carrot-300: #ffb57d;
+  --color-carrot-400: #ff9550;
+  --color-carrot-500: #fb7a26; /* ⭐ 브랜드 기본색 */
+  --color-carrot-600: #e85f0b;
+  --color-carrot-700: #bf4907;
+  --color-carrot-800: #96390b;
+  --color-carrot-900: #77300f;
 
-  /* 서브 그린 */
-  --color-leaf-50: #f1faf0;
-  --color-leaf-100: #ddf3da;
-  --color-leaf-200: #bce6b6;
-  --color-leaf-300: #92d489;
-  --color-leaf-400: #66be5c;
-  --color-leaf-500: #43a63c;
-  --color-leaf-600: #2f8a2c;
-  --color-leaf-700: #276e26;
-  --color-leaf-800: #235823;
-  --color-leaf-900: #1e491f;
+  /* ── 2. 따뜻한 중립색 (배경 · 테두리 · 글자) ───── */
+  --color-cream: #fff8f1; /* 페이지 바탕 */
+  --color-paper: #ffffff; /* 카드 바탕 */
+  --color-sand-50: #fdf5ec;
+  --color-sand-100: #f8ebdd;
+  --color-sand-200: #efdcc9; /* 기본 테두리 */
+  --color-sand-300: #ddc4a9;
+  --color-ink: #2f2119; /* 본문 글자 */
+  --color-ink-soft: #7a685b; /* 보조 설명 */
+  --color-ink-faint: #a89686; /* 아주 흐린 글자 */
 
-  /* 포인트 컬러칩 */
-  --color-cream: #fff9f0;
-  --color-paper: #fffdf9;
-  --color-ink: #3b2c21;
-  --color-ink-soft: #8a7565;
-  --color-sky: #7fc8e8;
-  --color-berry: #ff6b8a;
-  --color-sun: #ffd24c;
-  --color-grape: #b08ae0;
+  /* ── 3. 포인트색 · 안전/완료 (세이지 그린) ─────── */
+  --color-leaf-50: #f2f8ef;
+  --color-leaf-100: #ddeed8;
+  --color-leaf-200: #bcdcb4;
+  --color-leaf-300: #93c78b;
+  --color-leaf-400: #6bb063;
+  --color-leaf-500: #4e9a4a;
+  --color-leaf-600: #3c7f3c;
+  --color-leaf-700: #326734;
+  --color-leaf-800: #2b542d;
+  --color-leaf-900: #234526;
 
-  /* 폰트 (layout.tsx 의 next/font 변수와 연결) */
+  /* ── 4. 포인트색 · 나머지 (배경 soft / 글자 ink 짝) */
+  --color-sun: #ffc53d;
+  --color-sun-soft: #fff1cd;
+  --color-sun-ink: #8a5a00;
+
+  --color-sky: #46b2cc;
+  --color-sky-soft: #e0f2f7;
+  --color-sky-ink: #156b80;
+
+  --color-berry: #f2596f;
+  --color-berry-soft: #ffe5e9;
+  --color-berry-ink: #c22b45;
+
+  --color-grape: #9b7ce0;
+  --color-grape-soft: #ece4fb;
+  --color-grape-ink: #5d3ea6;
+
+  /* ── 5. 글꼴 (layout.tsx 의 next/font 변수와 연결) ── */
   --font-display: var(--font-jua), "Apple SD Gothic Neo", sans-serif;
   --font-sans: var(--font-noto), "Apple SD Gothic Neo", sans-serif;
 
-  /* 동글동글한 반경 */
+  /* ── 6. 모서리 둥글기 ──────────────────────────── */
+  --radius-card: 1.25rem;
   --radius-blob: 2rem;
 
-  /* 애니메이션 */
-  --animate-float: float 4s ease-in-out infinite;
+  /* 아주 좁은 구형 폰(360px 미만)에서 헤더가 넘치지 않게 쓰는 기준점 */
+  --breakpoint-xs: 360px;
+
+  /* ── 7. 그림자 ─────────────────────────────────
+     soft : 살짝 떠 있는 카드
+     lift : 마우스를 올렸을 때 더 떠오르는 느낌
+     pop  : 장난감처럼 "툭" 튀어나온 오렌지 버튼 */
+  --shadow-soft: 0 1px 2px rgba(47, 33, 25, 0.05), 0 14px 28px -20px rgba(47, 33, 25, 0.3);
+  --shadow-lift: 0 2px 6px rgba(47, 33, 25, 0.07), 0 26px 46px -26px rgba(47, 33, 25, 0.42);
+  --shadow-pop: 0 4px 0 0 var(--color-carrot-700), 0 12px 20px -12px rgba(232, 95, 11, 0.65);
+
+  /* ── 8. 움직임 ─────────────────────────────────── */
+  --animate-float: float 4.5s ease-in-out infinite;
   --animate-wiggle: wiggle 2.5s ease-in-out infinite;
   --animate-pop: pop 0.35s ease-out;
+  --animate-twinkle: twinkle 2.8s ease-in-out infinite;
+  --animate-sway: sway 6s ease-in-out infinite;
 
   @keyframes float {
     0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+    50% { transform: translateY(-12px); }
   }
   @keyframes wiggle {
     0%, 100% { transform: rotate(-3deg); }
@@ -64,43 +106,89 @@
     0% { transform: scale(0.94); opacity: 0; }
     100% { transform: scale(1); opacity: 1; }
   }
+  /* 반짝임 — 크기와 투명도가 같이 숨 쉬듯 */
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.25; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.1); }
+  }
+  /* 살랑살랑 (꼬리·잎사귀용) */
+  @keyframes sway {
+    0%, 100% { transform: rotate(-1.5deg); }
+    50% { transform: rotate(1.5deg); }
+  }
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
   }
+
+  /* 페이지 바탕
+     ① 오른쪽 위 은은한 오렌지 빛무리
+     ② 왼쪽 위 살구빛 빛무리
+     ③ 아주 옅은 오렌지 점무늬 (전에는 오렌지+초록 두 겹이라 지저분했어요) */
   body {
     background-color: var(--color-cream);
     color: var(--color-ink);
     font-family: var(--font-sans);
-    /* 은은한 점무늬 배경 */
     background-image:
-      radial-gradient(var(--color-carrot-100) 1.5px, transparent 1.6px),
-      radial-gradient(var(--color-leaf-100) 1.5px, transparent 1.6px);
-    background-size: 36px 36px, 36px 36px;
-    background-position: 0 0, 18px 18px;
+      radial-gradient(52rem 28rem at 88% -8%, rgba(255, 168, 92, 0.28), transparent 62%),
+      radial-gradient(40rem 24rem at -6% 2%, rgba(255, 206, 160, 0.3), transparent 58%),
+      radial-gradient(circle, rgba(251, 122, 38, 0.1) 1.4px, transparent 1.5px);
+    background-size: auto, auto, 26px 26px;
+    background-repeat: no-repeat, no-repeat, repeat;
+    background-attachment: fixed, fixed, scroll;
   }
+
   h1, h2, h3, .font-display {
     font-family: var(--font-display);
     letter-spacing: -0.01em;
   }
-  /* 포커스 링도 브랜드 컬러로 */
+
+  /* 드래그로 글자를 선택했을 때도 브랜드 색으로 */
+  ::selection {
+    background: var(--color-carrot-200);
+    color: var(--color-carrot-900);
+  }
+
+  /* 키보드 탭으로 이동할 때 보이는 테두리 */
   :focus-visible {
     outline: 3px solid var(--color-carrot-400);
     outline-offset: 2px;
   }
+
+  /* 움직임을 불편해하는 분들을 위해 애니메이션을 끕니다 */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
 }
 
 @layer components {
-  /* 살짝 떠 있는 카드 */
+  /* ── 카드 ────────────────────────────────────── */
+  /* 살짝 떠 있는 기본 카드 */
   .card-soft {
     background: var(--color-paper);
-    border: 2px solid var(--color-carrot-100);
+    border: 1.5px solid var(--color-sand-200);
     border-radius: var(--radius-blob);
-    box-shadow: 0 10px 0 -4px var(--color-carrot-100), 0 18px 30px -18px rgba(59, 44, 33, 0.35);
+    box-shadow: var(--shadow-soft);
   }
-  /* 꾹 눌리는 느낌의 버튼 */
+  /* 마우스를 올리면 살짝 떠오르는 카드 */
+  .card-hover {
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  }
+  .card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lift);
+    border-color: var(--color-carrot-200);
+  }
+
+  /* ── 버튼 ────────────────────────────────────── */
+  /* 꾹 눌리는 느낌 (모든 버튼 공통) */
   .btn-squish {
     transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
   }
@@ -110,5 +198,44 @@
   .btn-squish:active {
     transform: translateY(3px);
     box-shadow: none !important;
+  }
+
+  /* 오렌지 메인 버튼 — 위가 밝고 아래가 진한 그라데이션 */
+  .btn-primary {
+    background-image: linear-gradient(180deg, var(--color-carrot-400), var(--color-carrot-500) 55%, var(--color-carrot-600));
+    color: #fff;
+    box-shadow: var(--shadow-pop);
+  }
+  /* 테두리만 있는 보조 버튼 */
+  .btn-outline {
+    background: var(--color-paper);
+    color: var(--color-carrot-700);
+    border: 2px solid var(--color-carrot-200);
+    box-shadow: 0 4px 0 0 var(--color-carrot-100);
+  }
+  .btn-outline:hover {
+    border-color: var(--color-carrot-400);
+  }
+  /* 오렌지 배경 위에 올리는 하얀 버튼 */
+  .btn-white {
+    background: #fff;
+    color: var(--color-carrot-700);
+    box-shadow: 0 4px 0 0 var(--color-carrot-800), 0 14px 22px -12px rgba(0, 0, 0, 0.35);
+  }
+
+  /* ── 작은 라벨(칩) ───────────────────────────── */
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    border-radius: 9999px;
+    padding: 0.3rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+
+  /* ── 종이 질감 구분선 ────────────────────────── */
+  .divider-dash {
+    border-top: 2px dashed var(--color-sand-200);
   }
 }

@@ -20,11 +20,11 @@ export function TextField({ label, name, icon, error, hint, trailing, ...input }
       <span
         className={`flex items-center gap-2 rounded-2xl border-2 bg-paper px-3.5 transition ${
           invalid
-            ? "border-berry bg-berry/5"
-            : "border-carrot-200 focus-within:border-carrot-400"
+            ? "border-berry bg-berry-soft/60"
+            : "border-sand-200 focus-within:border-carrot-400"
         }`}
       >
-        {icon && <span className="shrink-0 text-carrot-400">{icon}</span>}
+        {icon && <span className="shrink-0 text-ink-faint">{icon}</span>}
         <input
           id={name}
           name={name}

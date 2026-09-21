@@ -27,13 +27,13 @@ export function AuthShell({
     <div className="mx-auto grid max-w-6xl items-center gap-10 px-5 py-10 lg:grid-cols-[1fr_minmax(0,27rem)] lg:py-16">
       {/* 왼쪽: 일러스트 + 안내 */}
       <section className="order-2 lg:order-1">
-        <div className="relative overflow-hidden rounded-blob border-2 border-carrot-100 bg-gradient-to-br from-carrot-50 via-paper to-leaf-50 p-8">
+        <div className="relative overflow-hidden rounded-blob border border-sand-200 bg-gradient-to-br from-carrot-50 via-paper to-sand-50 p-8 shadow-soft">
           {/* 배경 장식 */}
           <PawPrint size={120} className="pointer-events-none absolute -right-6 -top-6 rotate-12 text-carrot-100" />
-          <PawPrint size={72} className="pointer-events-none absolute -bottom-4 left-1/3 -rotate-12 text-leaf-100" />
+          <PawPrint size={72} className="pointer-events-none absolute -bottom-4 left-1/3 -rotate-12 text-sand-100" />
 
           <div className="relative">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-leaf-100 px-3 py-1 text-xs font-bold text-leaf-700">
+            <span className="chip bg-carrot-100 text-carrot-700">
               {eyebrow}
             </span>
 
@@ -51,7 +51,7 @@ export function AuthShell({
               {bullets.map((b) => (
                 <li
                   key={b.text}
-                  className="flex items-center gap-2.5 rounded-2xl border-2 border-carrot-100 bg-paper/80 px-3.5 py-3 text-sm text-ink"
+                  className="flex items-center gap-2.5 rounded-2xl border border-sand-200 bg-paper/80 px-3.5 py-3 text-sm text-ink"
                 >
                   <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-carrot-100 text-carrot-600">
                     {b.icon}
@@ -95,7 +95,7 @@ export function Notice({
 }) {
   const styles =
     tone === "error"
-      ? "border-berry/40 bg-berry/10 text-berry"
+      ? "border-berry/40 bg-berry-soft text-berry-ink"
       : "border-leaf-300 bg-leaf-50 text-leaf-700";
 
   return (

@@ -15,7 +15,9 @@ export function AvatarPicker({ defaultValue = "orange" }: { defaultValue?: CatCo
     <div>
       <span className="mb-2 block text-sm font-medium text-ink">
         내 고양이 고르기{" "}
-        <span className="font-normal text-ink-soft">— {CAT_COLORS[selected].name}</span>
+        <span className="font-normal text-ink-soft">
+          — {CAT_COLORS[selected].name} · {CAT_COLORS[selected].tagline}
+        </span>
       </span>
 
       <input type="hidden" name="avatarKey" value={selected} />
@@ -33,7 +35,7 @@ export function AvatarPicker({ defaultValue = "orange" }: { defaultValue?: CatCo
               className={`btn-squish relative grid size-16 place-items-center rounded-2xl border-2 transition ${
                 isSelected
                   ? "border-carrot-500 bg-carrot-50 shadow-[0_4px_0_0_var(--color-carrot-300)]"
-                  : "border-carrot-100 bg-paper hover:border-carrot-300"
+                  : "border-sand-200 bg-paper hover:border-carrot-300"
               }`}
             >
               <CatFace size={46} color={key} mood={isSelected ? "happy" : "sleepy"} />

@@ -18,7 +18,7 @@ export function SubmitButton({
     <button
       type="submit"
       disabled={pending}
-      className={`btn-squish flex w-full items-center justify-center gap-2 rounded-2xl bg-carrot-500 px-5 py-3.5 font-display text-lg text-white shadow-[0_5px_0_0_var(--color-carrot-700)] disabled:cursor-not-allowed disabled:opacity-70 ${className}`}
+      className={`btn-squish btn-primary flex w-full items-center justify-center gap-2 rounded-2xl px-5 py-3.5 font-display text-lg disabled:cursor-not-allowed disabled:opacity-70 ${className}`}
     >
       {pending ? (
         <>
