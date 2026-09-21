@@ -36,7 +36,7 @@ export default async function EditProductPage({
         <p className="mt-3 text-[15px] text-ink-soft">내가 올린 글만 수정할 수 있어요.</p>
         <Link
           href={`/products/${id}`}
-          className="btn-squish mt-7 inline-flex rounded-2xl btn-primary px-5 py-3 font-display text-lg"
+          className="btn-squish mt-7 inline-flex btn-primary rounded-xl px-5 py-3 text-[15px] font-bold"
         >
           글 보러 가기
         </Link>

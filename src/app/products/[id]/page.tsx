@@ -71,7 +71,7 @@ export default async function ProductDetailPage({
   return (
     <div className="mx-auto max-w-5xl px-5 py-8">
       {(sp.created === "1" || sp.updated === "1") && (
-        <div className="mb-6 flex items-center gap-3 rounded-2xl border-2 border-leaf-200 bg-leaf-50 px-4 py-3 text-sm font-medium text-leaf-800">
+        <div className="mb-6 flex items-center gap-3 rounded-2xl border border-leaf-200 bg-leaf-50 px-4 py-3 text-sm font-medium text-leaf-800">
           <CheckIcon size={20} className="shrink-0" />
           {sp.created === "1"
             ? "글을 올렸어요! 좋은 주인을 만나길 바랄게요 🐾"
@@ -101,7 +101,7 @@ export default async function ProductDetailPage({
             >
               {statusLabel(product.status)}
             </span>
-            <span className="rounded-full border-2 border-sand-200 px-2.5 py-0.5 text-xs font-bold text-ink-soft">
+            <span className="rounded-full border border-sand-200 px-2.5 py-0.5 text-xs font-bold text-ink-soft">
               {conditionLabel(product.condition)}
             </span>
           </div>
@@ -120,7 +120,7 @@ export default async function ProductDetailPage({
           </p>
 
           {/* 판매자 */}
-          <div className="mt-6 flex items-center gap-3 rounded-3xl border-2 border-sand-200 bg-paper px-4 py-3.5">
+          <div className="mt-6 flex items-center gap-3 rounded-3xl border border-sand-200 bg-paper px-4 py-3.5">
             <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-carrot-50">
               <CatFace
                 size={40}
@@ -156,12 +156,12 @@ export default async function ProductDetailPage({
           {/* 조작 영역 */}
           <div className="mt-8">
             {isOwner ? (
-              <div className="grid gap-4 rounded-3xl border-2 border-dashed border-sand-200 bg-carrot-50/60 p-5">
+              <div className="grid gap-4 rounded-3xl border border-dashed border-sand-200 bg-carrot-50/60 p-5">
                 <StatusSelect id={product.id} current={product.status} />
                 <div className="flex flex-wrap gap-2.5">
                   <Link
                     href={`/products/${product.id}/edit`}
-                    className="btn-squish rounded-2xl btn-primary px-5 py-2.5 text-sm font-bold"
+                    className="btn-squish btn-primary rounded-xl px-5 py-2.5 text-sm font-bold"
                   >
                     글 수정하기
                   </Link>
@@ -173,7 +173,7 @@ export default async function ProductDetailPage({
                 <button
                   type="button"
                   disabled
-                  className="flex flex-1 items-center justify-center gap-2 rounded-2xl bg-carrot-500/50 px-5 py-3.5 font-display text-lg text-white"
+                  className="flex flex-1 cursor-not-allowed items-center justify-center gap-2 rounded-xl border border-sand-200 bg-sand-100 px-5 py-3.5 text-[15px] font-bold text-ink-faint"
                   title="다음 단계에서 만들 기능이에요"
                 >
                   <ChatIcon size={19} />
@@ -182,7 +182,7 @@ export default async function ProductDetailPage({
                 <button
                   type="button"
                   disabled
-                  className="flex items-center justify-center gap-2 rounded-2xl border-2 border-sand-200 bg-paper px-5 py-3.5 font-display text-lg text-ink-soft/60"
+                  className="flex cursor-not-allowed items-center justify-center gap-2 rounded-xl border border-sand-200 bg-paper px-5 py-3.5 text-[15px] font-bold text-ink-faint"
                   title="다음 단계에서 만들 기능이에요"
                 >
                   <HeartIcon size={19} />찜
@@ -213,14 +213,14 @@ export default async function ProductDetailPage({
       )}
 
       {!user && (
-        <div className="mt-14 flex flex-col items-center gap-3 rounded-blob border-2 border-leaf-200 bg-leaf-50 px-6 py-8 text-center">
+        <div className="mt-14 flex flex-col items-center gap-3 rounded-blob border border-sand-200 bg-sand-50 px-6 py-10 text-center">
           <CatFace size={72} color="green" mood="wink" />
-          <p className="font-display text-xl text-leaf-800">
+          <p className="text-xl text-ink">
             가입하면 나도 물건을 올릴 수 있어요
           </p>
           <Link
             href="/signup"
-            className="btn-squish inline-flex items-center gap-2 rounded-2xl btn-primary px-5 py-3 font-display text-lg"
+            className="btn-squish btn-primary inline-flex items-center gap-2 rounded-xl px-5 py-3 text-[15px] font-bold"
           >
             <SparkleIcon size={18} />
             회원가입하기

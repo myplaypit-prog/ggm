@@ -24,7 +24,7 @@ export function StatusSelect({ id, current }: { id: string; current: string }) {
               <button
                 type="submit"
                 disabled={on}
-                className={`btn-squish rounded-2xl border-2 px-4 py-2 text-sm font-bold transition ${
+                className={`btn-squish rounded-2xl border px-4 py-2 text-sm font-bold transition ${
                   on
                     ? "cursor-default border-carrot-500 bg-carrot-50 text-carrot-700"
                     : "border-sand-200 bg-paper text-ink-soft hover:border-carrot-300"

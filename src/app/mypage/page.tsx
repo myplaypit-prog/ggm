@@ -69,13 +69,13 @@ export default async function MyPage({
   return (
     <div className="mx-auto max-w-5xl px-5 py-10">
       {sp.welcome === "1" && (
-        <div className="mb-6 flex items-center gap-3 rounded-2xl border-2 border-sun bg-sun-soft px-4 py-3 text-sm font-medium text-sun-ink">
+        <div className="mb-6 flex items-center gap-3 rounded-xl border border-sun/40 bg-sun-soft px-4 py-3 text-sm font-medium text-sun-ink">
           <SparkleIcon size={20} className="shrink-0" />
           가입을 축하해요! 이제 만물마켓의 이웃이 되었어요. 🎉
         </div>
       )}
       {sp.deleted === "1" && (
-        <div className="mb-6 flex items-center gap-3 rounded-2xl border-2 border-leaf-200 bg-leaf-50 px-4 py-3 text-sm font-medium text-leaf-800">
+        <div className="mb-6 flex items-center gap-3 rounded-xl border border-leaf-200 bg-leaf-50 px-4 py-3 text-sm font-medium text-leaf-800">
           <CheckIcon size={20} className="shrink-0" />
           글을 지웠어요.
         </div>
@@ -89,7 +89,7 @@ export default async function MyPage({
         />
 
         <div className="relative flex flex-col items-center gap-6 sm:flex-row sm:items-start">
-          <div className="grid size-32 shrink-0 place-items-center rounded-blob border-2 border-carrot-200 bg-carrot-50">
+          <div className="grid size-28 shrink-0 place-items-center rounded-3xl border border-sand-200 bg-carrot-50">
             <CatFace size={104} color={avatarKey} mood="happy" className="animate-float" />
           </div>
 
@@ -98,7 +98,7 @@ export default async function MyPage({
               {CAT_COLORS[avatarKey].name} 이웃 · {CAT_COLORS[avatarKey].tagline}
             </span>
 
-            <h1 className="mt-2.5 font-display text-3xl text-ink">{nickname}</h1>
+            <h1 className="mt-3 text-[2rem] text-ink">{nickname}</h1>
 
             <dl className="mt-4 grid gap-2 text-sm text-ink-soft sm:max-w-sm">
               <div className="flex items-center justify-center gap-2 sm:justify-start">
@@ -117,38 +117,38 @@ export default async function MyPage({
 
             {/* 판매 요약 */}
             <div className="mt-5 flex justify-center gap-2.5 sm:justify-start">
-              <span className="rounded-2xl border border-sand-200 bg-paper px-4 py-2 text-center">
-                <span className="block font-display text-xl text-carrot-600">{sellingCount}</span>
-                <span className="text-[11px] text-ink-soft">판매중</span>
+              <span className="rounded-xl border border-sand-200 bg-paper px-4 py-2.5 text-center">
+                <span className="tabular block font-display text-xl text-carrot-600">{sellingCount}</span>
+                <span className="text-[11px] font-medium text-ink-faint">판매중</span>
               </span>
-              <span className="rounded-2xl border border-sand-200 bg-paper px-4 py-2 text-center">
-                <span className="block font-display text-xl text-leaf-600">{soldCount}</span>
-                <span className="text-[11px] text-ink-soft">판매완료</span>
+              <span className="rounded-xl border border-sand-200 bg-paper px-4 py-2.5 text-center">
+                <span className="tabular block font-display text-xl text-leaf-600">{soldCount}</span>
+                <span className="text-[11px] font-medium text-ink-faint">판매완료</span>
               </span>
-              <span className="rounded-2xl border border-sand-200 bg-paper px-4 py-2 text-center">
-                <span className="block font-display text-xl text-ink">{myProducts.length}</span>
-                <span className="text-[11px] text-ink-soft">전체</span>
+              <span className="rounded-xl border border-sand-200 bg-paper px-4 py-2.5 text-center">
+                <span className="tabular block font-display text-xl text-ink">{myProducts.length}</span>
+                <span className="text-[11px] font-medium text-ink-faint">전체</span>
               </span>
             </div>
 
             <div className="mt-6 flex flex-wrap justify-center gap-2.5 sm:justify-start">
               <Link
                 href="/products/new"
-                className="btn-squish btn-primary flex items-center gap-1.5 rounded-2xl px-5 py-2.5 font-display text-base"
+                className="btn-squish btn-primary flex items-center gap-1.5 rounded-xl px-5 py-2.5 text-[15px] font-bold"
               >
                 <TagIcon size={17} />
                 물건 팔기
               </Link>
               <Link
                 href="/products"
-                className="btn-squish btn-outline rounded-2xl px-5 py-2.5 font-display text-base"
+                className="btn-squish btn-outline rounded-xl px-5 py-2.5 text-[15px] font-bold"
               >
                 만물 구경하기
               </Link>
               <form action={signOutAction}>
                 <button
                   type="submit"
-                  className="btn-squish flex items-center gap-1.5 rounded-2xl border-2 border-sand-200 bg-paper px-5 py-2.5 font-display text-base text-ink-soft hover:border-carrot-300 hover:text-carrot-700"
+                  className="btn-squish flex items-center gap-1.5 rounded-xl border border-sand-200 bg-paper px-5 py-2.5 text-[15px] font-bold text-ink-soft shadow-xs hover:border-sand-300 hover:text-ink"
                 >
                   <LogoutIcon size={17} />
                   로그아웃
@@ -163,7 +163,7 @@ export default async function MyPage({
       <section className="mt-10">
         <div className="mb-4 flex items-end justify-between gap-4">
           <div>
-            <h2 className="font-display text-2xl text-ink">내가 올린 물건</h2>
+            <h2 className="text-[1.6rem] text-ink">내가 올린 물건</h2>
             <p className="mt-1 text-sm text-ink-soft">
               눌러서 수정하거나 판매 상태를 바꿀 수 있어요.
             </p>
@@ -172,15 +172,15 @@ export default async function MyPage({
         </div>
 
         {myProducts.length === 0 ? (
-          <div className="rounded-blob border-2 border-dashed border-sand-300 bg-paper/70 px-6 py-14 text-center">
+          <div className="rounded-blob border border-dashed border-sand-300 bg-paper px-6 py-14 text-center">
             <CatFace size={92} color="cream" mood="sleepy" className="mx-auto animate-float" />
-            <p className="mt-3 font-display text-xl text-ink">아직 올린 물건이 없어요</p>
+            <p className="mt-4 text-xl text-ink">아직 올린 물건이 없어요</p>
             <p className="mt-1.5 text-sm text-ink-soft">
               안 쓰는 물건, 누군가에겐 보물일지도 몰라요.
             </p>
             <Link
               href="/products/new"
-              className="btn-squish btn-primary mt-6 inline-flex rounded-2xl px-5 py-3 font-display text-lg"
+              className="btn-squish btn-primary mt-6 inline-flex rounded-xl px-5 py-3 text-[15px] font-bold"
             >
               첫 물건 올리기
             </Link>
@@ -200,18 +200,18 @@ export default async function MyPage({
 
       {/* 다음 단계 안내 */}
       <section className="mt-12">
-        <h2 className="font-display text-2xl text-ink">곧 열리는 기능들</h2>
+        <h2 className="text-[1.6rem] text-ink">곧 열리는 기능들</h2>
         <ul className="mt-4 grid gap-3 sm:grid-cols-2">
           {COMING_SOON.map(({ title, desc, icon: Icon, tone }) => (
             <li
               key={title}
-              className="flex items-center gap-3.5 rounded-3xl border-2 border-dashed border-sand-300 bg-paper/70 px-5 py-4"
+              className="flex items-center gap-3.5 rounded-2xl border border-dashed border-sand-300 bg-paper px-5 py-4"
             >
               <span className={`grid size-12 shrink-0 place-items-center rounded-2xl ${tone}`}>
                 <Icon size={24} />
               </span>
               <div className="min-w-0">
-                <p className="font-display text-lg text-ink">{title}</p>
+                <p className="text-[17px] text-ink">{title}</p>
                 <p className="truncate text-sm text-ink-soft">{desc}</p>
               </div>
               <span className="ml-auto shrink-0 rounded-full bg-carrot-50 px-2.5 py-1 text-[11px] font-bold text-carrot-600">

@@ -98,7 +98,7 @@ export function ProductForm({
                   : "숫자만 적어 주세요."
             }
           />
-          <label className="mt-2.5 inline-flex cursor-pointer items-center gap-2 rounded-full border-2 border-leaf-200 bg-leaf-50 px-3.5 py-1.5 text-sm font-medium text-leaf-700">
+          <label className="mt-2.5 inline-flex cursor-pointer items-center gap-2 rounded-full border border-leaf-200 bg-leaf-50 px-3.5 py-1.5 text-sm font-medium text-leaf-700">
             <input
               type="checkbox"
               checked={free}
@@ -144,7 +144,7 @@ export function ProductForm({
         <div className="flex gap-3">
           <Link
             href={mode === "edit" ? `/products/${product!.id}` : "/products"}
-            className="btn-squish grid shrink-0 place-items-center rounded-2xl border-2 border-sand-200 bg-paper px-5 font-display text-lg text-ink-soft hover:border-carrot-300"
+            className="btn-squish grid shrink-0 place-items-center rounded-xl border border-sand-200 bg-paper px-5 text-[15px] font-bold text-ink-soft hover:border-sand-300"
           >
             취소
           </Link>

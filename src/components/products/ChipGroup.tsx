@@ -39,9 +39,9 @@ export function ChipGroup({
               type="button"
               onClick={() => setSelected(opt.key)}
               aria-pressed={on}
-              className={`btn-squish rounded-2xl border-2 px-3.5 py-2.5 text-left text-sm transition ${
+              className={`btn-squish rounded-2xl border px-3.5 py-2.5 text-left text-sm transition ${
                 on
-                  ? "border-carrot-500 bg-carrot-50 font-bold text-carrot-700 shadow-[0_3px_0_0_var(--color-carrot-200)]"
+                  ? "border-carrot-500 bg-carrot-50 font-bold text-carrot-700 shadow-[0_0_0_3px_rgba(251,95,19,0.14)]"
                   : "border-sand-200 bg-paper text-ink-soft hover:border-carrot-300"
               }`}
             >

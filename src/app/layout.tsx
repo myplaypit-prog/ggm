@@ -1,23 +1,7 @@
 import type { Metadata } from "next";
-import { Jua, Noto_Sans_KR } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-
-// 한글 폰트는 용량이 커서 preload 를 끄고 필요할 때 불러옵니다.
-const jua = Jua({
-  weight: "400",
-  variable: "--font-jua",
-  display: "swap",
-  preload: false,
-});
-
-// Noto Sans KR 은 가변 폰트라 weight 를 지정하지 않습니다.
-const noto = Noto_Sans_KR({
-  variable: "--font-noto",
-  display: "swap",
-  preload: false,
-});
 
 /**
  * 모든 페이지를 "요청이 올 때마다 새로 그리기"로 둡니다.
@@ -40,8 +24,24 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="ko" className={`${jua.variable} ${noto.variable}`}>
-      <body className="min-h-dvh flex flex-col antialiased">
+    <html lang="ko">
+      <head>
+        {/*
+          글꼴: Pretendard
+          한글 화면의 품질을 가장 크게 좌우하는 게 글꼴입니다.
+          Pretendard 는 요즘 한국 서비스들이 표준처럼 쓰는 글꼴이라,
+          이것만 바꿔도 화면이 훨씬 정돈돼 보여요.
+
+          "dynamic-subset" 은 화면에 실제로 쓰인 글자만 잘라서 받아오는 방식이라
+          한글 글꼴인데도 가볍습니다.
+        */}
+        <link rel="preconnect" href="https://cdn.jsdelivr.net" crossOrigin="anonymous" />
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
+        />
+      </head>
+      <body className="flex min-h-dvh flex-col antialiased">
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

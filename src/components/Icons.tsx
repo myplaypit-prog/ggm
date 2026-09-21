@@ -130,6 +130,13 @@ export const AlertIcon = (p: IconProps) => (
   </Base>
 );
 
+export const SearchIcon = (p: IconProps) => (
+  <Base {...p}>
+    <circle cx="11" cy="11" r="7" />
+    <path d="m20 20-3.6-3.6" />
+  </Base>
+);
+
 export const ArrowRightIcon = (p: IconProps) => (
   <Base {...p}>
     <path d="M4.5 12h15M14 6.5l5.5 5.5L14 17.5" />

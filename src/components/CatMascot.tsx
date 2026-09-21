@@ -47,12 +47,12 @@ export const CAT_COLORS: Record<CatColorKey, CatColorDef> = {
   orange: {
     name: "치즈냥",
     tagline: "흥정의 달인",
-    light: "#FFDDB0",
-    base: "#FFB169",
-    shade: "#F59240",
-    deep: "#E0752A",
+    light: "#FFD7A4",
+    base: "#FFA157",
+    shade: "#F58230",
+    deep: "#D9601A",
     marking: "tabby",
-    mark: "#EF8A33",
+    mark: "#EE7A22",
   },
   green: {
     name: "새싹냥",
@@ -522,14 +522,14 @@ export function CatWithBox({ size = 380, ...props }: { size?: number } & SVGProp
       <defs>
         {/* 배경 원 */}
         <radialGradient id="mmh-bg" cx="38%" cy="30%" r="80%">
-          <stop offset="0%" stopColor="#FFF7EE" />
-          <stop offset="100%" stopColor="#FFDFC0" />
+          <stop offset="0%" stopColor="#FFF6EC" />
+          <stop offset="100%" stopColor="#FFE0C6" />
         </radialGradient>
         {/* 고양이 몸통 */}
         <linearGradient id="mmh-body" x1="0.2" y1="0" x2="0.85" y2="1">
-          <stop offset="0%" stopColor="#FFDDB0" />
-          <stop offset="50%" stopColor="#FFB169" />
-          <stop offset="100%" stopColor="#F59240" />
+          <stop offset="0%" stopColor="#FFD7A4" />
+          <stop offset="50%" stopColor="#FFA157" />
+          <stop offset="100%" stopColor="#F58230" />
         </linearGradient>
         {/* 가슴털 (가장자리가 부드럽게 사라지도록) */}
         <radialGradient id="mmh-chest">
@@ -556,8 +556,8 @@ export function CatWithBox({ size = 380, ...props }: { size?: number } & SVGProp
         </linearGradient>
         {/* 화분 */}
         <linearGradient id="mmh-pot" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#FFB169" />
-          <stop offset="100%" stopColor="#E0752A" />
+          <stop offset="0%" stopColor="#FFA157" />
+          <stop offset="100%" stopColor="#D9601A" />
         </linearGradient>
         {/* 램프갓 */}
         <linearGradient id="mmh-lamp" x1="0.1" y1="0" x2="0.9" y2="1">
@@ -589,14 +589,14 @@ export function CatWithBox({ size = 380, ...props }: { size?: number } & SVGProp
         cy="176"
         r="172"
         fill="none"
-        stroke="#F6B77F"
+        stroke="#F7BC89"
         strokeWidth="2.5"
         strokeDasharray="1 15"
         strokeLinecap="round"
         opacity="0.7"
       />
       {/* 배경에 흩어진 동그라미 — 깊이감용 */}
-      <g fill="#FFB169" opacity="0.22">
+      <g fill="#FFA157" opacity="0.22">
         <circle cx="74" cy="80" r="5" />
         <circle cx="330" cy="76" r="7" />
         <circle cx="48" cy="196" r="4" />
@@ -616,7 +616,7 @@ export function CatWithBox({ size = 380, ...props }: { size?: number } & SVGProp
       <path
         d="M200 136 C244 136 268 174 268 218 C268 256 238 280 200 280 C162 280 132 256 132 218 C132 174 156 136 200 136 Z"
         fill="none"
-        stroke="#E0752A"
+        stroke="#D9601A"
         strokeWidth="2.2"
         opacity="0.4"
       />
@@ -639,7 +639,7 @@ export function CatWithBox({ size = 380, ...props }: { size?: number } & SVGProp
       </g>
       {/* 화분 (윗부분만 상자 밖으로) */}
       <path d="M78 202 L122 202 L116 240 L84 240 Z" fill="url(#mmh-pot)" />
-      <rect x="74" y="194" width="52" height="14" rx="7" fill="#FFC489" />
+      <rect x="74" y="194" width="52" height="14" rx="7" fill="#FFBE7C" />
       <rect x="74" y="194" width="52" height="6" rx="3" fill="#FFE0BC" opacity="0.8" />
 
       {/* 책 두 권 — 왼쪽, 화분 앞에 기대어 */}
@@ -692,12 +692,12 @@ export function CatWithBox({ size = 380, ...props }: { size?: number } & SVGProp
       <g className="animate-sway" style={{ transformOrigin: "284px 274px" }}>
         <path d={TAIL} fill="url(#mmh-body)" />
         {/* 꼬리 줄무늬 */}
-        <g clipPath="url(#mmh-tail-clip)" stroke="#EF8A33" strokeWidth="8" strokeLinecap="round" opacity="0.5">
+        <g clipPath="url(#mmh-tail-clip)" stroke="#EE7A22" strokeWidth="8" strokeLinecap="round" opacity="0.5">
           <path d="M296 262 L312 272" />
           <path d="M318 222 L336 226" />
           <path d="M320 186 L336 186" />
         </g>
-        <path d={TAIL} fill="none" stroke="#E0752A" strokeWidth="2" opacity="0.38" strokeLinejoin="round" />
+        <path d={TAIL} fill="none" stroke="#D9601A" strokeWidth="2" opacity="0.38" strokeLinejoin="round" />
       </g>
 
       {/* 앞판 */}
@@ -745,23 +745,23 @@ export function CatWithBox({ size = 380, ...props }: { size?: number } & SVGProp
 
       {/* ── 얼굴 ───────────────────────────────────────── */}
       {/* 턱 아래 그림자 — 얼굴이 몸에 붙어 보이게 */}
-      <ellipse cx="202" cy="182" rx="52" ry="18" fill="#D97F2C" opacity="0.22" filter="url(#mmh-blur-sm)" />
+      <ellipse cx="202" cy="182" rx="52" ry="18" fill="#D06E1E" opacity="0.22" filter="url(#mmh-blur-sm)" />
       <g transform="translate(136 36)">
         <CatFace size={128} color="orange" mood="happy" />
       </g>
 
       {/* ── 상자를 안은 앞발 ───────────────────────────── */}
       <g>
-        <ellipse cx="116" cy="228" rx="27" ry="16" fill="#FFC489" transform="rotate(-12 116 228)" />
-        <ellipse cx="284" cy="228" rx="27" ry="16" fill="#FFC489" transform="rotate(12 284 228)" />
+        <ellipse cx="116" cy="228" rx="27" ry="16" fill="#FFBE7C" transform="rotate(-12 116 228)" />
+        <ellipse cx="284" cy="228" rx="27" ry="16" fill="#FFBE7C" transform="rotate(12 284 228)" />
         {/* 발 위쪽 하이라이트 */}
-        <ellipse cx="112" cy="223" rx="17" ry="7" fill="#FFE5C4" opacity="0.75" transform="rotate(-12 112 223)" />
-        <ellipse cx="280" cy="223" rx="17" ry="7" fill="#FFE5C4" opacity="0.75" transform="rotate(12 280 223)" />
+        <ellipse cx="112" cy="223" rx="17" ry="7" fill="#FFE0BA" opacity="0.75" transform="rotate(-12 112 223)" />
+        <ellipse cx="280" cy="223" rx="17" ry="7" fill="#FFE0BA" opacity="0.75" transform="rotate(12 280 223)" />
         {/* 윤곽 */}
-        <ellipse cx="116" cy="228" rx="27" ry="16" fill="none" stroke="#E0752A" strokeWidth="2" opacity="0.38" transform="rotate(-12 116 228)" />
-        <ellipse cx="284" cy="228" rx="27" ry="16" fill="none" stroke="#E0752A" strokeWidth="2" opacity="0.38" transform="rotate(12 284 228)" />
+        <ellipse cx="116" cy="228" rx="27" ry="16" fill="none" stroke="#D9601A" strokeWidth="2" opacity="0.38" transform="rotate(-12 116 228)" />
+        <ellipse cx="284" cy="228" rx="27" ry="16" fill="none" stroke="#D9601A" strokeWidth="2" opacity="0.38" transform="rotate(12 284 228)" />
         {/* 발가락 주름 */}
-        <g stroke="#E8974A" strokeWidth="2.2" strokeLinecap="round" opacity="0.7">
+        <g stroke="#E58B38" strokeWidth="2.2" strokeLinecap="round" opacity="0.7">
           <path d="M107 222 L105 232" />
           <path d="M116 220 L115 231" />
           <path d="M125 221 L125 231" />

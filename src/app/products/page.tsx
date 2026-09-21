@@ -68,7 +68,7 @@ export default async function ProductsPage({
 
         <Link
           href="/products/new"
-          className="btn-squish inline-flex shrink-0 items-center gap-2 rounded-2xl btn-primary px-5 py-3 font-display text-lg"
+          className="btn-squish inline-flex shrink-0 items-center gap-2 btn-primary rounded-xl px-5 py-3 text-[15px] font-bold"
         >
           <SparkleIcon size={18} />내 물건 팔기
         </Link>
@@ -78,11 +78,11 @@ export default async function ProductsPage({
 
       {/* 목록 */}
       {error ? (
-        <p className="mt-12 rounded-2xl border-2 border-berry/40 bg-berry/10 px-4 py-3 text-sm font-medium text-berry">
+        <p className="mt-12 rounded-xl border border-berry/30 bg-berry-soft px-4 py-3 text-sm font-medium text-berry-ink">
           목록을 불러오지 못했어요: {error.message}
         </p>
       ) : products.length === 0 ? (
-        <div className="mt-12 rounded-blob border-2 border-dashed border-sand-200 bg-paper/70 px-6 py-16 text-center">
+        <div className="mt-12 rounded-blob border border-dashed border-sand-200 bg-paper/70 px-6 py-16 text-center">
           <CatFace size={110} color="cream" mood="sleepy" className="mx-auto animate-float" />
           <h2 className="mt-4 font-display text-2xl text-ink">아직 아무것도 없어요</h2>
           <p className="mt-2 text-sm text-ink-soft">
@@ -92,7 +92,7 @@ export default async function ProductsPage({
           </p>
           <Link
             href="/products/new"
-            className="btn-squish mt-6 inline-flex rounded-2xl btn-primary px-5 py-3 font-display text-lg"
+            className="btn-squish mt-6 inline-flex btn-primary rounded-xl px-5 py-3 text-[15px] font-bold"
           >
             물건 올리러 가기
           </Link>

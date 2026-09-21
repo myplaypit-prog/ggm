@@ -18,13 +18,13 @@ export default function AuthErrorPage() {
       <div className="mt-7 flex justify-center gap-3">
         <Link
           href="/login"
-          className="btn-squish btn-primary rounded-2xl px-5 py-3 font-display text-lg"
+          className="btn-squish btn-primary rounded-xl px-5 py-3 text-[15px] font-bold"
         >
           로그인
         </Link>
         <Link
           href="/signup"
-          className="btn-squish rounded-2xl border-2 border-carrot-300 bg-paper px-5 py-3 font-display text-lg text-carrot-700"
+          className="btn-squish btn-outline rounded-xl px-5 py-3 text-[15px] font-bold"
         >
           회원가입
         </Link>

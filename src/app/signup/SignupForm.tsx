@@ -24,12 +24,12 @@ export function SignupForm() {
         </span>
         <h2 className="mt-4 font-display text-2xl text-ink">메일함을 확인해 주세요!</h2>
         <p className="mt-3 text-[15px] leading-relaxed text-ink-soft">{state.message}</p>
-        <div className="mt-6 rounded-2xl border-2 border-dashed border-sand-300 bg-carrot-50 px-4 py-3 text-xs leading-relaxed text-ink-soft">
+        <div className="mt-6 rounded-xl border border-dashed border-sand-300 bg-carrot-50 px-4 py-3 text-xs leading-relaxed text-ink-soft">
           메일이 안 보이면 스팸함도 한 번 열어 보세요. 링크를 누르면 만물마켓으로 다시 돌아와요.
         </div>
         <Link
           href="/login"
-          className="btn-squish mt-6 inline-flex rounded-2xl border-2 border-carrot-300 bg-paper px-5 py-3 font-display text-lg text-carrot-700"
+          className="btn-squish mt-6 inline-flex btn-outline rounded-xl px-5 py-3 text-[15px] font-bold"
         >
           로그인하러 가기
         </Link>

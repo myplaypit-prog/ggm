@@ -32,11 +32,11 @@ export function ProductFilters({
           name="q"
           defaultValue={q}
           placeholder="무엇을 찾고 계세요? (예: 기타, 화분)"
-          className="w-full rounded-2xl border-2 border-sand-200 bg-paper px-4 py-3 text-[15px] text-ink outline-none transition placeholder:text-ink-soft/60 focus:border-carrot-400"
+          className="field"
         />
         <button
           type="submit"
-          className="btn-squish shrink-0 rounded-2xl btn-primary px-5 font-display text-base"
+          className="btn-squish btn-primary shrink-0 rounded-xl px-5 text-[15px] font-bold"
         >
           찾기
         </button>
@@ -46,7 +46,7 @@ export function ProductFilters({
       <div className="flex flex-wrap gap-2">
         <Link
           href={buildHref({ q, sort })}
-          className={`rounded-full border-2 px-3.5 py-1.5 text-sm font-bold transition ${
+          className={`rounded-full border px-3.5 py-1.5 text-sm font-bold transition ${
             category === ""
               ? "border-carrot-500 bg-carrot-500 text-white"
               : "border-sand-200 bg-paper text-ink-soft hover:border-carrot-300"
@@ -61,7 +61,7 @@ export function ProductFilters({
           <Link
             key={c.key}
             href={buildHref({ q, sort, category: c.key })}
-            className={`rounded-full border-2 px-3.5 py-1.5 text-sm font-bold transition ${
+            className={`rounded-full border px-3.5 py-1.5 text-sm font-bold transition ${
               category === c.key
                 ? "border-carrot-500 bg-carrot-500 text-white"
                 : "border-sand-200 bg-paper text-ink-soft hover:border-carrot-300"

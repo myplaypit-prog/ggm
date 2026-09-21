@@ -93,7 +93,7 @@ export function ImageUploader({
           type="button"
           onClick={() => inputRef.current?.click()}
           disabled={busy || paths.length >= MAX_IMAGES}
-          className="btn-squish grid size-24 shrink-0 place-items-center rounded-2xl border-2 border-dashed border-carrot-300 bg-carrot-50 text-carrot-600 transition hover:border-carrot-400 disabled:cursor-not-allowed disabled:opacity-50"
+          className="btn-squish grid size-24 shrink-0 place-items-center rounded-2xl border border-dashed border-carrot-300 bg-carrot-50 text-carrot-600 transition hover:border-carrot-400 disabled:cursor-not-allowed disabled:opacity-50"
         >
           {busy ? (
             <LoaderIcon size={24} className="animate-spin" />
@@ -109,7 +109,7 @@ export function ImageUploader({
         {paths.map((path, i) => (
           <div
             key={path}
-            className="relative size-24 shrink-0 overflow-hidden rounded-2xl border-2 border-sand-200 bg-carrot-50"
+            className="relative size-24 shrink-0 overflow-hidden rounded-2xl border border-sand-200 bg-carrot-50"
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img

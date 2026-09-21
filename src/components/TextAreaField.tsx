@@ -17,7 +17,7 @@ export function TextAreaField({ label, name, error, hint, ...textarea }: Props) 
         id={name}
         name={name}
         aria-invalid={invalid}
-        className={`w-full resize-y rounded-2xl border-2 bg-paper px-3.5 py-3 text-[15px] leading-relaxed text-ink outline-none transition placeholder:text-ink-soft/60 ${
+        className={`w-full resize-y rounded-2xl border bg-paper px-3.5 py-3 text-[15px] leading-relaxed text-ink outline-none transition placeholder:text-ink-faint ${
           invalid ? "border-berry bg-berry/5" : "border-sand-200 focus:border-carrot-400"
         }`}
         {...textarea}

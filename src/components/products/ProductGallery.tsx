@@ -9,7 +9,7 @@ export function ProductGallery({ images, title }: { images: string[]; title: str
 
   if (images.length === 0) {
     return (
-      <div className="grid aspect-[4/3] w-full place-items-center rounded-blob border-2 border-dashed border-sand-200 bg-carrot-50">
+      <div className="grid aspect-[4/3] w-full place-items-center rounded-blob border border-dashed border-sand-200 bg-carrot-50">
         <div className="text-center">
           <CatFace size={96} color="cream" mood="sleepy" className="mx-auto animate-float" />
           <p className="mt-2 text-sm text-ink-soft">사진 없이 올라온 물건이에요</p>
@@ -20,7 +20,7 @@ export function ProductGallery({ images, title }: { images: string[]; title: str
 
   return (
     <div>
-      <div className="aspect-[4/3] w-full overflow-hidden rounded-blob border-2 border-sand-200 bg-carrot-50">
+      <div className="aspect-[4/3] w-full overflow-hidden rounded-blob border border-sand-200 bg-carrot-50">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={productImageUrl(images[current])}
@@ -38,7 +38,7 @@ export function ProductGallery({ images, title }: { images: string[]; title: str
               onClick={() => setCurrent(i)}
               aria-label={`사진 ${i + 1} 보기`}
               aria-pressed={i === current}
-              className={`size-16 overflow-hidden rounded-xl border-2 transition ${
+              className={`size-16 overflow-hidden rounded-xl border transition ${
                 i === current
                   ? "border-carrot-500 ring-2 ring-carrot-200"
                   : "border-sand-200 opacity-70 hover:opacity-100"

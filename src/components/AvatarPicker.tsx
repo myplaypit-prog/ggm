@@ -22,7 +22,8 @@ export function AvatarPicker({ defaultValue = "orange" }: { defaultValue?: CatCo
 
       <input type="hidden" name="avatarKey" value={selected} />
 
-      <div className="flex flex-wrap gap-2.5">
+      {/* 5마리가 좁은 카드 안에서도 한 줄에 들어가도록 5칸 격자로 둡니다 */}
+      <div className="grid grid-cols-5 gap-2">
         {CAT_COLOR_KEYS.map((key) => {
           const isSelected = key === selected;
           return (
@@ -32,15 +33,20 @@ export function AvatarPicker({ defaultValue = "orange" }: { defaultValue?: CatCo
               onClick={() => setSelected(key)}
               aria-pressed={isSelected}
               title={CAT_COLORS[key].name}
-              className={`btn-squish relative grid size-16 place-items-center rounded-2xl border-2 transition ${
+              className={`btn-squish relative grid aspect-square w-full place-items-center rounded-xl border transition ${
                 isSelected
-                  ? "border-carrot-500 bg-carrot-50 shadow-[0_4px_0_0_var(--color-carrot-300)]"
-                  : "border-sand-200 bg-paper hover:border-carrot-300"
+                  ? "border-carrot-400 bg-carrot-50 shadow-[0_0_0_3px_rgba(251,95,19,0.15)]"
+                  : "border-sand-200 bg-paper hover:border-sand-300"
               }`}
             >
-              <CatFace size={46} color={key} mood={isSelected ? "happy" : "sleepy"} />
+              <CatFace
+                size={44}
+                color={key}
+                mood={isSelected ? "happy" : "sleepy"}
+                className="h-auto w-[86%]"
+              />
               {isSelected && (
-                <span className="absolute -right-1.5 -top-1.5 grid size-6 place-items-center rounded-full bg-leaf-500 text-white">
+                <span className="absolute -right-1.5 -top-1.5 grid size-5.5 place-items-center rounded-full bg-leaf-500 text-white">
                   <CheckIcon size={15} />
                 </span>
               )}

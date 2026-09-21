@@ -16,7 +16,7 @@ export function DeleteProductButton({ id }: { id: string }) {
       <button
         type="button"
         onClick={() => setAsking(true)}
-        className="btn-squish rounded-2xl border-2 border-berry/40 bg-paper px-4 py-2.5 text-sm font-bold text-berry transition hover:bg-berry/10"
+        className="btn-squish rounded-2xl border border-berry/40 bg-paper px-4 py-2.5 text-sm font-bold text-berry-ink transition hover:bg-berry-soft"
       >
         삭제
       </button>
@@ -24,14 +24,14 @@ export function DeleteProductButton({ id }: { id: string }) {
   }
 
   return (
-    <div className="flex w-full items-center gap-3 rounded-2xl border-2 border-berry/40 bg-berry/10 px-4 py-3">
+    <div className="flex w-full items-center gap-3 rounded-xl border border-berry/30 bg-berry-soft px-4 py-3">
       <CatFace size={36} color="gray" mood="sleepy" className="shrink-0" />
-      <p className="text-sm font-medium text-berry">정말 지울까요? 사진도 같이 사라져요.</p>
+      <p className="text-sm font-medium text-berry-ink">정말 지울까요? 사진도 같이 사라져요.</p>
       <div className="ml-auto flex shrink-0 gap-2">
         <button
           type="button"
           onClick={() => setAsking(false)}
-          className="btn-squish rounded-xl border-2 border-sand-200 bg-paper px-3 py-1.5 text-sm font-medium text-ink-soft"
+          className="btn-squish rounded-xl border border-sand-200 bg-paper px-3 py-1.5 text-sm font-medium text-ink-soft"
         >
           아니요
         </button>
