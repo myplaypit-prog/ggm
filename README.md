@@ -2,6 +2,9 @@
 
 우리 동네 만물 중고마켓. **뭐든지 있고, 뭐든지 팔아요.**
 
+🌐 **배포 사이트: https://ggm-woay.vercel.app**
+(GitHub `main` 에 push 하면 Vercel 이 자동으로 새로 배포합니다)
+
 - 프레임워크: **Next.js 15 (App Router) + TypeScript**
 - 스타일: **Tailwind CSS v4** (설정은 `src/app/globals.css` 안 `@theme`)
 - 백엔드: **Supabase** (기존 가계부 프로젝트 `ggb0921_db` 와 같은 DB 사용)

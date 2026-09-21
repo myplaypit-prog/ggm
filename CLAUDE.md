@@ -88,7 +88,7 @@ Claude가 할 수 있는 일은 **묻지 말고 그냥 합니다.**
 | 프레임워크 | Next.js 15 (App Router) + TypeScript |
 | 스타일 | Tailwind CSS v4 (설정은 `src/app/globals.css`의 `@theme`) |
 | 백엔드/DB | Supabase (PostgreSQL + Auth) |
-| 배포 | Vercel |
+| 배포 | Vercel → https://ggm-woay.vercel.app (main 에 push 하면 자동 배포) |
 | 실행 | `npm run dev` → http://localhost:3000 |
 
 ---
