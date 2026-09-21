@@ -21,6 +21,21 @@
 | 마이페이지 | `/mypage` | 로그인해야 들어갈 수 있는 보호 페이지 |
 | 이메일 인증 | `/auth/callback` | 인증 메일 링크가 돌아오는 자리 |
 
+## 2단계에서 만든 것 ✅ — 거래 글 CRUD
+
+| 기능 | 경로 | 설명 |
+| --- | --- | --- |
+| 목록 · 검색 | `/products` | 카테고리 필터, 제목·설명 검색, 최신순/가격순 정렬 |
+| 올리기 | `/products/new` | 사진(최대 5장) · 제목 · 카테고리 · 상품상태 · 가격(나눔) · 동네 · 설명 |
+| 상세 | `/products/[id]` | 사진 갤러리, 판매자 카드, 같은 판매자의 다른 물건 |
+| 수정 | `/products/[id]/edit` | 내 글만. 판매 상태도 함께 바꿀 수 있어요 |
+| 삭제 | 상세 페이지 | 고양이가 한 번 더 물어본 뒤, 사진까지 같이 지웁니다 |
+| 판매 상태 | 상세 페이지 | 판매중 / 예약중 / 판매완료 |
+| 내 판매 내역 | `/mypage` | 판매중·판매완료 개수와 내가 올린 물건 목록 |
+
+> CRUD = Create(만들기) · Read(읽기) · Update(고치기) · Delete(지우기).
+> 게시판의 기본 네 가지 동작을 부르는 말이에요.
+
 ---
 
 ## 처음 실행하기
@@ -81,7 +96,14 @@ manmul.test.001@example.com / manmul1234   (닉네임: 테스트냥, 우유냥 �
 ```
 public.entries      ← 가계부 (건드리지 않음)
 public.settings     ← 가계부 (건드리지 않음)
-public.mm_profiles  ← 만물마켓 회원 프로필  ⭐ 이번에 추가
+public.mm_profiles  ← 만물마켓 회원 프로필  (1단계)
+public.mm_products  ← 만물마켓 거래 글      (2단계) ⭐
+```
+
+스토리지(파일 보관함) 버킷도 하나 씁니다.
+
+```
+mm-products  ← 상품 사진. 읽기는 누구나, 올리기·지우기는 본인 폴더({내 id}/파일명)만
 ```
 
 `mm_profiles` 컬럼
@@ -99,7 +121,34 @@ public.mm_profiles  ← 만물마켓 회원 프로필  ⭐ 이번에 추가
 - **트리거** `mm_on_auth_user_created`: 가입하면 프로필 행이 자동으로 생깁니다.
   닉네임이 겹치면 뒤에 숫자를 붙여 재시도해요.
 
+`mm_products` 컬럼
+
+| 컬럼 | 타입 | 설명 |
+| --- | --- | --- |
+| `id` | uuid | 글 번호 (자동 생성) |
+| `seller_id` | uuid | 판매자 = `mm_profiles.id` |
+| `title` | text | 제목 2~60자 |
+| `description` | text | 설명 2000자까지 |
+| `price` | integer | **0이면 나눔** |
+| `category` | text | `fashion` `digital` `interior` `book` `hobby` `kids` `plant` `etc` |
+| `condition` | text | `new` `like_new` `used` `broken` |
+| `status` | text | `selling` `reserved` `sold` |
+| `region` | text | 거래 동네 (비우면 내 프로필 동네) |
+| `images` | text[] | 스토리지 파일 경로, 최대 5장. 첫 장이 대표 사진 |
+| `created_at` / `updated_at` | timestamptz | |
+
+- **RLS**: 글 조회는 누구나, 쓰기·수정·삭제는 글쓴이만.
+- 회원이 탈퇴하면 프로필과 그 사람의 글이 함께 지워집니다 (`on delete cascade`).
+
 실제 적용한 SQL은 `supabase/migrations/` 에 남겨 두었습니다.
+
+### 아직 다듬지 않은 부분 (다음에 고치면 좋아요)
+
+- 사진을 올린 뒤 폼을 저장하지 않고 나가면 **스토리지에 파일이 남습니다.**
+  (안 쓰는 파일을 청소하는 기능은 아직 없어요)
+- 목록은 최대 48개까지만 보여 줍니다. 더보기/페이지 나누기는 아직 없어요.
+- 1단계에 만든 화면들(로그인·회원가입 등)은 아직 옛 색 토큰(`border-carrot-100` 등)을
+  쓰고 있어요. 2차 디자인 토큰(`sand-200`, `*-soft`/`*-ink`)으로 정리하면 더 깔끔해집니다.
 
 ---
 
@@ -169,11 +218,11 @@ src/
 
 ---
 
-## 다음 단계 아이디어 (2단계 이후)
+## 다음 단계 아이디어 (3단계 이후)
 
-1. 상품 등록 (`mm_products` 테이블 + Supabase Storage 이미지 업로드)
-2. 상품 목록 / 상세 / 카테고리 필터
-3. 찜하기 (`mm_likes`)
-4. 채팅 (`mm_chat_rooms`, `mm_messages` + Realtime)
-5. 프로필 수정 (닉네임 · 동네 · 고양이 바꾸기)
+1. 찜하기 (`mm_likes` 테이블 + 상세 페이지의 하트 버튼)
+2. 채팅 (`mm_chat_rooms`, `mm_messages` + Realtime)
+3. 프로필 수정 (닉네임 · 동네 · 고양이 바꾸기)
+4. 목록 더보기 / 무한스크롤
+5. 1단계 화면들을 2차 디자인 토큰으로 정리
 6. Vercel 배포 (가계부와 다른 링크로)

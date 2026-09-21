@@ -1,10 +1,16 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
-/** 로그인이 필요한 경로들 */
-const PROTECTED_PREFIXES = ["/mypage"];
 /** 이미 로그인했다면 들어갈 필요 없는 경로들 */
 const GUEST_ONLY_PREFIXES = ["/login", "/signup"];
+
+/** 로그인이 필요한 경로인지 판단합니다. */
+function isProtected(pathname: string) {
+  if (pathname.startsWith("/mypage")) return true;
+  if (pathname === "/products/new") return true;
+  if (/^\/products\/[^/]+\/edit\/?$/.test(pathname)) return true;
+  return false;
+}
 
 /**
  * 매 요청마다 만료된 액세스 토큰을 갱신하고,
@@ -41,7 +47,7 @@ export async function updateSession(request: NextRequest) {
 
   const { pathname } = request.nextUrl;
 
-  if (!user && PROTECTED_PREFIXES.some((p) => pathname.startsWith(p))) {
+  if (!user && isProtected(pathname)) {
     const url = request.nextUrl.clone();
     url.pathname = "/login";
     url.searchParams.set("next", pathname);
