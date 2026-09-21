@@ -89,6 +89,53 @@ manmul.test.001@example.com / manmul1234   (닉네임: 테스트냥, 우유냥 �
 
 ---
 
+## Vercel 배포 (환경변수 설정)
+
+배포한 사이트에서 이런 화면이 뜬다면 **환경변수가 비어 있는 것**입니다.
+
+> This page is unavailable
+> Routing Middleware for this page temporarily failed.
+
+모든 요청이 지나가는 검문소(미들웨어)가 Supabase 주소를 못 찾아서 멈춘 상태예요.
+아래 3개를 Vercel 에 넣어 주면 해결됩니다.
+
+### 1. Vercel 에 넣을 값
+
+Vercel → 프로젝트 → **Settings** → **Environment Variables** 에서
+**Key / Value** 칸에 하나씩 넣습니다. (여러 줄 붙여넣기도 됩니다)
+
+```
+NEXT_PUBLIC_SUPABASE_URL=https://luoikfzoiiildaplurjr.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=sb_publishable_pvLOdTVr-piqUMAXCXLb2Q_Qs5L6J0u
+NEXT_PUBLIC_SITE_URL=https://내-배포주소.vercel.app
+```
+
+- `NEXT_PUBLIC_SITE_URL` 만 **본인 배포 주소**로 바꿔 주세요. 끝에 `/` 를 붙이지 않습니다.
+- 환경(Environment)은 **Production · Preview · Development 전부 체크**합니다.
+- **Sensitive(비밀값) 로 표시하지 마세요.** `NEXT_PUBLIC_` 으로 시작하는 값은
+  원래 브라우저까지 전달되는 공개용 값이라 비밀번호가 아닙니다.
+  (실제로 이 키는 브라우저 개발자도구에서도 보입니다)
+
+### 2. 다시 배포하기 ⚠️ 가장 자주 빠뜨리는 단계
+
+환경변수는 **이미 만들어진 배포에는 적용되지 않습니다.**
+값을 넣은 뒤 반드시 다시 배포해야 해요.
+
+1. Vercel → 프로젝트 → **Deployments** 탭
+2. 맨 위 배포의 오른쪽 **⋯** → **Redeploy**
+3. "Use existing Build Cache" 는 **체크 해제** 후 Redeploy
+
+(또는 GitHub 에 아무 커밋이나 push 하면 자동으로 새로 배포됩니다)
+
+### 3. 잘 됐는지 확인
+
+배포 주소로 들어가서 홈 화면이 뜨고, 로그인까지 되면 성공입니다.
+
+안 되면 Vercel → 프로젝트 → **Logs** 에서 `[미들웨어]` 로 시작하는 한국어 메시지를
+찾아보세요. 무엇이 비었는지 알려 줍니다.
+
+---
+
 ## DB 구조
 
 가계부와 **같은 데이터베이스**를 쓰기 때문에, 만물마켓 테이블은 전부 `mm_` 접두사를 붙입니다.
