@@ -194,7 +194,8 @@ export function CatFace({
         </radialGradient>
         {/* 주둥이 볼록함 */}
         <radialGradient id={`${g}-muzzle`}>
-          <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.72" />
+          <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.88" />
+          <stop offset="70%" stopColor="#FFFFFF" stopOpacity="0.4" />
           <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0" />
         </radialGradient>
         {/* 얼굴 안쪽만 칠하기 위한 오려내기 틀 */}
@@ -253,8 +254,8 @@ export function CatFace({
       </g>
 
       {/* ── 주둥이 (볼록한 두 덩어리 + 그 위에 코·입) ──── */}
-      <ellipse cx="56" cy="90" rx="13" ry="9.5" fill={`url(#${g}-muzzle)`} />
-      <ellipse cx="72" cy="90" rx="13" ry="9.5" fill={`url(#${g}-muzzle)`} />
+      <ellipse cx="55.5" cy="89" rx="14" ry="10.5" fill={`url(#${g}-muzzle)`} />
+      <ellipse cx="72.5" cy="89" rx="14" ry="10.5" fill={`url(#${g}-muzzle)`} />
 
       {/* ── 눈썹 (놀란 표정일 때만) ────────────────────── */}
       {mood === "wow" && (
@@ -294,9 +295,9 @@ export function CatFace({
           <path d="M58 103 C60 107.5 68 107.5 70 103 Z" fill="#FF8DA1" />
         </>
       ) : (
-        <g stroke={INK} strokeWidth="2.5" strokeLinecap="round" fill="none">
-          <path d="M64 91.5 C64 97.5 59.2 99.4 56 96.8" />
-          <path d="M64 91.5 C64 97.5 68.8 99.4 72 96.8" />
+        <g stroke={INK} strokeWidth="2.6" strokeLinecap="round" fill="none">
+          <path d="M64 91 C64 98 58.4 100.2 54.6 97" />
+          <path d="M64 91 C64 98 69.6 100.2 73.4 97" />
         </g>
       )}
     </svg>
@@ -405,12 +406,12 @@ function CatMarkingOver({ cat }: { cat: CatColorDef }) {
         />
       );
 
-    // 구름냥 — 머리 위에 작은 별 두 개
+    // 구름냥 — 얼굴 옆에 떠 있는 작은 별 두 개
     case "cloud":
       return (
         <g className="animate-twinkle" fill="#FFD76B">
-          <path d="M92 10 l2.2 5.4 l5.4 2.2 l-5.4 2.2 l-2.2 5.4 l-2.2 -5.4 l-5.4 -2.2 l5.4 -2.2 Z" />
-          <path d="M34 6 l1.5 3.8 l3.8 1.5 l-3.8 1.5 l-1.5 3.8 l-1.5 -3.8 l-3.8 -1.5 l3.8 -1.5 Z" />
+          <path d="M111 34 l2.1 5.2 l5.2 2.1 l-5.2 2.1 l-2.1 5.2 l-2.1 -5.2 l-5.2 -2.1 l5.2 -2.1 Z" />
+          <path d="M15 46 l1.5 3.8 l3.8 1.5 l-3.8 1.5 l-1.5 3.8 l-1.5 -3.8 l-3.8 -1.5 l3.8 -1.5 Z" />
         </g>
       );
 
@@ -458,22 +459,22 @@ function CatMarkingFace({ cat }: { cat: CatColorDef }) {
         />
       );
 
-    // 구름냥 — 이마에 구름 한 조각 (아래에 옅은 그림자를 줘서 떠 보이게)
+    // 구름냥 — 머리 위쪽만 털이 진한 "캡 무늬".
+    // 아래쪽 경계를 구름처럼 물결지게 깎아서 이름값도 합니다.
     case "cloud":
       return (
         <g>
-          <g fill="#A8BFD2" opacity="0.4" transform="translate(0 3)">
-            <circle cx="52" cy="43" r="8.5" />
-            <circle cx="64" cy="37" r="10.5" />
-            <circle cx="76" cy="44" r="8" />
-            <rect x="50" y="43" width="28" height="10" rx="5" />
-          </g>
-          <g fill="#FFFFFF">
-            <circle cx="52" cy="43" r="8.5" />
-            <circle cx="64" cy="37" r="10.5" />
-            <circle cx="76" cy="44" r="8" />
-            <rect x="50" y="43" width="28" height="10" rx="5" />
-          </g>
+          <path
+            d="M20 58 C22 40 34 24 64 24 C94 24 106 40 108 58 C100 52 92 48 84 50 C77 52 72 57 64 57 C56 57 51 52 44 50 C36 48 28 52 20 58 Z"
+            fill="#B2C6D6"
+            opacity="0.95"
+          />
+          {/* 캡 아래 옅은 그늘 */}
+          <path
+            d="M20 58 C28 52 36 48 44 50 C51 52 56 57 64 57 C72 57 77 52 84 50 C92 48 100 52 108 58 C100 58 94 55 86 54 C78 53 72 61 64 61 C56 61 50 53 42 54 C34 55 28 58 20 58 Z"
+            fill="#8FA7BC"
+            opacity="0.35"
+          />
         </g>
       );
 

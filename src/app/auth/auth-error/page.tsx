@@ -18,7 +18,7 @@ export default function AuthErrorPage() {
       <div className="mt-7 flex justify-center gap-3">
         <Link
           href="/login"
-          className="btn-squish rounded-2xl bg-carrot-500 px-5 py-3 font-display text-lg text-white shadow-[0_5px_0_0_var(--color-carrot-700)]"
+          className="btn-squish btn-primary rounded-2xl px-5 py-3 font-display text-lg"
         >
           로그인
         </Link>

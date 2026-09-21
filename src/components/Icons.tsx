@@ -143,67 +143,110 @@ export const LoaderIcon = (p: IconProps) => (
 );
 
 /* ------------------------------------------------------------------
-   카테고리 일러스트 아이콘 — "만물"이라는 느낌을 주는 컬러 아이콘들
+   카테고리 아이콘 — 마스코트와 같은 "면으로 채운" 스타일
+
+   위쪽 UI 아이콘(메일·자물쇠 등)은 얇은 선,
+   아래 카테고리 아이콘은 채운 면 — 이렇게 역할을 나눠 두면
+   화면이 정리돼 보입니다. (선 아이콘은 기능, 면 아이콘은 그림)
+
+   색은 두 톤만 씁니다.
+     · 연한 면 : currentColor 를 32% 로 (덩어리)
+     · 진한 면 : currentColor 그대로 (포인트)
+   칩의 글자색(text-berry-ink 등)을 그대로 따라가서 저절로 어울립니다.
 ------------------------------------------------------------------- */
+function Duo({ size = 24, children, ...props }: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      width={size}
+      height={size}
+      fill="currentColor"
+      aria-hidden="true"
+      {...props}
+    >
+      {children}
+    </svg>
+  );
+}
 
+/** 옷·패션 — 티셔츠 */
 export const ShirtIcon = (p: IconProps) => (
-  <Base {...p}>
-    <path d="M8.5 3.5 12 6l3.5-2.5 5 2.8-2 4-2 -1v9.2h-9V9.3l-2 1-2-4Z" />
-  </Base>
+  <Duo {...p}>
+    <path opacity="0.32" d="M8.6 2.6 12 4.9l3.4-2.3 5.6 3-2.3 5.1-1.7-.8V21H7V9.9l-1.7.8L3 5.6Z" />
+    <path d="M9.3 2.9 12 4.7l2.7-1.8-.5 1.7a2.6 2.6 0 0 1-4.4 0Z" />
+    <path opacity="0.55" d="M7 15.6h10V17H7z" />
+  </Duo>
 );
 
+/** 디지털 — 스마트폰 */
 export const DeviceIcon = (p: IconProps) => (
-  <Base {...p}>
-    <rect x="6.5" y="2.5" width="11" height="19" rx="3" />
-    <path d="M10.5 18.5h3" />
-  </Base>
+  <Duo {...p}>
+    <rect opacity="0.32" x="5.8" y="2" width="12.4" height="20" rx="3.6" />
+    <rect x="8" y="5.2" width="8" height="10.6" rx="1.8" />
+    <circle cx="12" cy="18.8" r="1.25" />
+  </Duo>
 );
 
+/** 가구·인테리어 — 소파 */
 export const SofaIcon = (p: IconProps) => (
-  <Base {...p}>
-    <path d="M4 11V8a2.5 2.5 0 0 1 5 0v3h6V8a2.5 2.5 0 0 1 5 0v3" />
-    <rect x="2.5" y="11" width="19" height="7" rx="2.5" />
-    <path d="M5.5 18v2.5M18.5 18v2.5" />
-  </Base>
+  <Duo {...p}>
+    <path opacity="0.32" d="M5 9.4A2.6 2.6 0 0 1 7.6 6.8h8.8A2.6 2.6 0 0 1 19 9.4v4.8H5Z" />
+    <rect x="2.4" y="12.4" width="19.2" height="6.2" rx="2.8" />
+    <path opacity="0.6" d="M5.4 18.4h2.1V21H5.4zm11.1 0h2.1V21h-2.1z" />
+  </Duo>
 );
 
+/** 도서·티켓 — 펼친 책 */
 export const BookIcon = (p: IconProps) => (
-  <Base {...p}>
-    <path d="M4 4.5A1.5 1.5 0 0 1 5.5 3H19v18H5.5A1.5 1.5 0 0 1 4 19.5Z" />
-    <path d="M8 3v18M19 17H5.5" />
-  </Base>
+  <Duo {...p}>
+    <path
+      opacity="0.32"
+      d="M12 6.6C10 4.9 7.4 4.3 4.7 4.7a1.4 1.4 0 0 0-1.2 1.4v11.2c0 .9.7 1.5 1.6 1.4 2.3-.3 4.5.2 6.9 1.9Z"
+    />
+    <path d="M12 6.6c2-1.7 4.6-2.3 7.3-1.9.7.1 1.2.7 1.2 1.4v11.2c0 .9-.7 1.5-1.6 1.4-2.3-.3-4.5.2-6.9 1.9Z" />
+  </Duo>
 );
 
+/** 취미·악기 — 기타 */
 export const GuitarIcon = (p: IconProps) => (
-  <Base {...p}>
-    <path d="M14.5 3.5 18 7l2.5-2.5" />
-    <path d="M14.5 6.5 9.5 11.5" />
-    <path d="M9.5 11.5a4 4 0 1 0-2.2 6.8A4 4 0 1 0 9.5 11.5Z" />
-  </Base>
+  <Duo {...p}>
+    <path
+      opacity="0.32"
+      d="M9.6 11.8a4.5 4.5 0 0 1 3 7.7c-2.4 2.4-6.4 1.6-8.1-.1s-2.5-5.7-.1-8.1a4.5 4.5 0 0 1 5.2.5Z"
+    />
+    <circle cx="8.7" cy="15.3" r="2.1" />
+    <path d="m13.2 8.4 5.9-5.9a1.35 1.35 0 0 1 1.9 1.9l-5.9 5.9Z" />
+    <path opacity="0.6" d="m19.4 1.4 3.2 3.2-1.3 1.3-3.2-3.2Z" />
+  </Duo>
 );
 
+/** 유아·완구 — 곰인형 */
 export const BabyIcon = (p: IconProps) => (
-  <Base {...p}>
-    <circle cx="7" cy="6.5" r="2.5" />
-    <circle cx="17" cy="6.5" r="2.5" />
-    <circle cx="12" cy="14" r="7" />
-    <path d="M9.5 13h.01M14.5 13h.01M10 16.8a3 3 0 0 0 4 0" />
-  </Base>
+  <Duo {...p}>
+    <circle opacity="0.32" cx="6.6" cy="7.2" r="3.1" />
+    <circle opacity="0.32" cx="17.4" cy="7.2" r="3.1" />
+    <circle opacity="0.32" cx="12" cy="14" r="7.3" />
+    <circle cx="9.5" cy="12.8" r="1.25" />
+    <circle cx="14.5" cy="12.8" r="1.25" />
+    <path d="M9.6 16.3a3.2 3.2 0 0 0 4.8 0 .95.95 0 0 1 1.5 1.2 5.1 5.1 0 0 1-7.8 0 .95.95 0 0 1 1.5-1.2Z" />
+  </Duo>
 );
 
+/** 식물·반려 — 화분 */
 export const PlantIcon = (p: IconProps) => (
-  <Base {...p}>
-    <path d="M12 21v-8" />
-    <path d="M12 13c-4.5 0-6-3-6-6 4.5 0 6 3 6 6Z" />
-    <path d="M12 14c4.5 0 6-3.4 6-7-4.5 0-6 3.4-6 7Z" />
-    <path d="M8 21h8" />
-  </Base>
+  <Duo {...p}>
+    <path opacity="0.32" d="M11.6 12.6C7 12.6 5.2 9.4 5.2 6c4.6 0 6.4 3.2 6.4 6.6Z" />
+    <path opacity="0.32" d="M12.4 13.4c4.6 0 6.4-3.6 6.4-7.4-4.6 0-6.4 3.6-6.4 7.4Z" />
+    <rect x="5.9" y="12.6" width="12.2" height="3.2" rx="1.6" />
+    <path d="M7 16.4h10l-.9 4.2a1.7 1.7 0 0 1-1.7 1.3H9.6a1.7 1.7 0 0 1-1.7-1.3Z" />
+  </Duo>
 );
 
+/** 그 외 뭐든지 — 물음표 상자 */
 export const QuestionBoxIcon = (p: IconProps) => (
-  <Base {...p}>
-    <rect x="3.5" y="3.5" width="17" height="17" rx="5" />
-    <path d="M9.6 9.3a2.5 2.5 0 1 1 3.2 2.8c-.6.2-.8.7-.8 1.3" />
-    <circle cx="12" cy="16.6" r="1.1" fill="currentColor" stroke="none" />
-  </Base>
+  <Duo {...p}>
+    <rect opacity="0.32" x="2.6" y="2.6" width="18.8" height="18.8" rx="5.6" />
+    <path d="M12 6.1a3.6 3.6 0 0 0-3.6 3.4 1.15 1.15 0 0 0 2.3.1 1.35 1.35 0 1 1 2 1.3c-1 .6-1.6 1.4-1.6 2.5v.5a1.15 1.15 0 0 0 2.3 0v-.4c0-.3.1-.4.4-.6A3.6 3.6 0 0 0 12 6.1Z" />
+    <circle cx="12" cy="17.2" r="1.35" />
+  </Duo>
 );
