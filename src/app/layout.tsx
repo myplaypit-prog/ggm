@@ -19,6 +19,17 @@ const noto = Noto_Sans_KR({
   preload: false,
 });
 
+/**
+ * 모든 페이지를 "요청이 올 때마다 새로 그리기"로 둡니다.
+ *
+ * 왜 필요한가요?
+ * 헤더에 로그인한 사람의 닉네임과 고양이가 들어가기 때문에,
+ * 미리 만들어 둔 화면을 모두에게 똑같이 보여 주면 안 됩니다.
+ * 이걸 지정하지 않으면 Next.js 가 404 페이지 같은 걸 빌드할 때 미리 만들려다가
+ * Supabase 를 부르게 되고, 환경변수가 없으면 빌드 자체가 실패해요.
+ */
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "만물마켓 — 뭐든지 있고, 뭐든지 팔아요",
   description:

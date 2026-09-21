@@ -5,22 +5,35 @@ import { CatFace, type CatColorKey } from "./CatMascot";
 import { LogoutIcon, SparkleIcon, TagIcon } from "./Icons";
 
 export async function Header() {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
+  // 헤더는 모든 페이지에 들어갑니다. 404 페이지처럼 빌드할 때 미리 만들어 두는
+  // 페이지에도 포함되기 때문에, 여기서 오류가 나면 빌드 자체가 실패해요.
+  // (실제로 Vercel 환경변수가 비었을 때 "/_not-found 를 만들다 실패" 로 배포가 멈췄습니다)
+  // 그래서 로그인 정보를 못 읽으면 그냥 "로그아웃 상태"로 그려 줍니다.
+  let user: { id: string; email?: string } | null = null;
   let profile: { nickname: string; avatar_key: CatColorKey } | null = null;
-  if (user) {
-    const { data } = await supabase
-      .from("mm_profiles")
-      .select("nickname, avatar_key")
-      .eq("id", user.id)
-      .maybeSingle();
-    profile = (data as typeof profile) ?? {
-      nickname: user.email?.split("@")[0] ?? "만물이",
-      avatar_key: "orange",
-    };
+
+  try {
+    const supabase = await createClient();
+    const { data } = await supabase.auth.getUser();
+    user = data.user;
+
+    if (user) {
+      const { data: profileData } = await supabase
+        .from("mm_profiles")
+        .select("nickname, avatar_key")
+        .eq("id", user.id)
+        .maybeSingle();
+      profile = (profileData as typeof profile) ?? {
+        nickname: user.email?.split("@")[0] ?? "만물이",
+        avatar_key: "orange",
+      };
+    }
+  } catch (error) {
+    console.error(
+      "[헤더] 로그인 정보를 불러오지 못했어요. 로그아웃 상태로 보여 줍니다. " +
+        "(Supabase 환경변수를 확인해 주세요)",
+      error,
+    );
   }
 
   return (
