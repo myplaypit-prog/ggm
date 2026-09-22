@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { CAT_COLORS, CAT_COLOR_KEYS, CatFace, type CatColorKey } from "./CatMascot";
+import { CAT_COLORS, CAT_COLOR_KEYS, CatFace, type CatColorKey } from "./CatArtwork";
 import { CheckIcon } from "./Icons";
 
 /**

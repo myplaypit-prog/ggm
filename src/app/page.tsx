@@ -2,7 +2,7 @@ import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { CATEGORIES, type CategoryKey, type ProductWithSeller } from "@/lib/products";
 import { ProductCard } from "@/components/products/ProductCard";
-import { CatFace, CatWithBox, PawPrint } from "@/components/CatMascot";
+import { CatFace, CatWithBox, PawPrint } from "@/components/CatArtwork";
 import {
   ArrowRightIcon,
   BabyIcon,

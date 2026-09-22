@@ -8,7 +8,7 @@ import {
   PRODUCT_BUCKET,
   productImageUrl,
 } from "@/lib/products";
-import { CatFace } from "@/components/CatMascot";
+import { CatFace } from "@/components/CatArtwork";
 import { AlertIcon, LoaderIcon, SparkleIcon } from "@/components/Icons";
 
 const ALLOWED = ["image/jpeg", "image/png", "image/webp", "image/gif"];

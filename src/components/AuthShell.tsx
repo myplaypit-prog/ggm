@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CatFace, PawPrint, type CatColorKey, type CatMood } from "./CatMascot";
+import { CatFace, PawPrint, type CatColorKey, type CatMood } from "./CatArtwork";
 import { ArrowRightIcon, CheckIcon } from "./Icons";
 
 type Props = {

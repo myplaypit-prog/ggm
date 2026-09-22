@@ -5,7 +5,7 @@ import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 import type { AuthState } from "@/lib/auth-state";
 
-/** 아바타로 고를 수 있는 고양이 키 (CatMascot.tsx 와 DB check 제약이 같은 값을 씁니다) */
+/** 아바타로 고를 수 있는 고양이 키 (CatArtwork.tsx 와 DB check 제약이 같은 값을 씁니다) */
 const AVATAR_KEYS = ["orange", "green", "cream", "gray", "calico"] as const;
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

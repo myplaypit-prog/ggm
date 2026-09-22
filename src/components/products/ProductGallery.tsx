@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { productImageUrl } from "@/lib/products";
-import { CatFace } from "@/components/CatMascot";
+import { CatFace } from "@/components/CatArtwork";
 
 export function ProductGallery({ images, title }: { images: string[]; title: string }) {
   const [current, setCurrent] = useState(0);

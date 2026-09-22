@@ -9,7 +9,7 @@ import {
   statusLabel,
   type ProductWithSeller,
 } from "@/lib/products";
-import { CatFace, type CatColorKey } from "@/components/CatMascot";
+import { CatFace, type CatColorKey } from "@/components/CatArtwork";
 import { PinIcon } from "@/components/Icons";
 
 export function ProductCard({ product }: { product: ProductWithSeller }) {

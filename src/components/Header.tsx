@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { signOutAction } from "@/lib/auth-actions";
-import { CatFace, type CatColorKey } from "./CatMascot";
+import { CatFace, type CatColorKey } from "./CatArtwork";
 import { LogoutIcon, SparkleIcon, TagIcon } from "./Icons";
 
 export async function Header() {

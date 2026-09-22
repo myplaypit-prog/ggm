@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CatFace } from "./CatMascot";
+import { CatFace } from "./CatArtwork";
 
 /** 푸터에 넣을 링크 묶음 */
 const LINK_GROUPS = [

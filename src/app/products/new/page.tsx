@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { ProductForm } from "@/components/products/ProductForm";
-import { CatFace } from "@/components/CatMascot";
+import { CatFace } from "@/components/CatArtwork";
 
 export const metadata: Metadata = { title: "물건 팔기 · 만물마켓" };
 

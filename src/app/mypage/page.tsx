@@ -3,7 +3,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { signOutAction } from "@/lib/auth-actions";
-import { CAT_COLORS, CatFace, PawPrint, type CatColorKey } from "@/components/CatMascot";
+import { CAT_COLORS, CatFace, PawPrint, type CatColorKey } from "@/components/CatArtwork";
 import { ProductCard } from "@/components/products/ProductCard";
 import type { ProductWithSeller } from "@/lib/products";
 import {

@@ -4,7 +4,7 @@ import { notFound, redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import type { Product } from "@/lib/products";
 import { ProductForm } from "@/components/products/ProductForm";
-import { CatFace } from "@/components/CatMascot";
+import { CatFace } from "@/components/CatArtwork";
 
 export const metadata: Metadata = { title: "글 수정 · 만물마켓" };
 

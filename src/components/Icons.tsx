@@ -2,7 +2,7 @@ import type { SVGProps } from "react";
 
 type IconProps = SVGProps<SVGSVGElement> & { size?: number };
 
-/** 모든 아이콘이 공유하는 기본 형태 (선이 굵고 끝이 둥근, 친근한 느낌) */
+/** 모든 기능 아이콘이 공유하는 형태: 얇고 또렷한 24px 라운드 그리드 */
 function Base({ size = 20, children, ...props }: IconProps) {
   return (
     <svg
@@ -11,11 +11,13 @@ function Base({ size = 20, children, ...props }: IconProps) {
       height={size}
       fill="none"
       stroke="currentColor"
-      strokeWidth="2"
+      strokeWidth="1.8"
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden="true"
+      focusable="false"
       {...props}
+      style={{ display: "block", ...props.style }}
     >
       {children}
     </svg>
@@ -169,7 +171,9 @@ function Duo({ size = 24, children, ...props }: IconProps) {
       height={size}
       fill="currentColor"
       aria-hidden="true"
+      focusable="false"
       {...props}
+      style={{ display: "block", ...props.style }}
     >
       {children}
     </svg>

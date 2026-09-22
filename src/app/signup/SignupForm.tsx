@@ -9,7 +9,7 @@ import { TextField } from "@/components/TextField";
 import { PasswordField } from "@/components/PasswordField";
 import { SubmitButton } from "@/components/SubmitButton";
 import { AvatarPicker } from "@/components/AvatarPicker";
-import { CatFace, type CatColorKey } from "@/components/CatMascot";
+import { CatFace, type CatColorKey } from "@/components/CatArtwork";
 import { AlertIcon, MailIcon, PinIcon, UserIcon } from "@/components/Icons";
 
 export function SignupForm() {

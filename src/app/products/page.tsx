@@ -8,7 +8,7 @@ import {
 } from "@/lib/products";
 import { ProductCard } from "@/components/products/ProductCard";
 import { ProductFilters } from "@/components/products/ProductFilters";
-import { CatFace, PawPrint } from "@/components/CatMascot";
+import { CatFace, PawPrint } from "@/components/CatArtwork";
 import { SparkleIcon } from "@/components/Icons";
 
 export const metadata: Metadata = { title: "만물 구경하기 · 만물마켓" };

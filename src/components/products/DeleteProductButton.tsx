@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { deleteProductAction } from "@/lib/product-actions";
-import { CatFace } from "@/components/CatMascot";
+import { CatFace } from "@/components/CatArtwork";
 
 /**
  * 두 번 눌러야 지워지는 삭제 버튼.

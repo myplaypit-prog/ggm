@@ -16,7 +16,7 @@ import { ProductGallery } from "@/components/products/ProductGallery";
 import { StatusSelect } from "@/components/products/StatusSelect";
 import { DeleteProductButton } from "@/components/products/DeleteProductButton";
 import { ProductCard } from "@/components/products/ProductCard";
-import { CatFace, PawPrint, type CatColorKey } from "@/components/CatMascot";
+import { CatFace, PawPrint, type CatColorKey } from "@/components/CatArtwork";
 import { ChatIcon, CheckIcon, HeartIcon, PinIcon, SparkleIcon } from "@/components/Icons";
 
 const SELECT = "*, seller:mm_profiles(id, nickname, avatar_key, region)";

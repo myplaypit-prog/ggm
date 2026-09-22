@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CatFace, PawPrint } from "@/components/CatMascot";
+import { CatFace, PawPrint } from "@/components/CatArtwork";
 import { ArrowRightIcon, SearchIcon } from "@/components/Icons";
 
 /**

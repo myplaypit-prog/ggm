@@ -7,7 +7,7 @@ import { Notice } from "@/components/AuthShell";
 import { TextField } from "@/components/TextField";
 import { PasswordField } from "@/components/PasswordField";
 import { SubmitButton } from "@/components/SubmitButton";
-import { CatFace } from "@/components/CatMascot";
+import { CatFace } from "@/components/CatArtwork";
 import { AlertIcon, CheckIcon, MailIcon } from "@/components/Icons";
 
 export function LoginForm({ next, justVerified }: { next: string; justVerified: boolean }) {

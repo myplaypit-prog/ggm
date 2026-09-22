@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CatFace } from "@/components/CatMascot";
+import { CatFace } from "@/components/CatArtwork";
 
 export const metadata = { title: "인증에 실패했어요 · 만물마켓" };
 
