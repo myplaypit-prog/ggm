@@ -6,7 +6,7 @@ import { signOutAction } from "@/lib/auth-actions";
 import { CAT_COLORS, CatFace, PawPrint, type CatColorKey } from "@/components/CatArtwork";
 import { ProductCard } from "@/components/products/ProductCard";
 import { PRODUCT_SELECT, type ProductWithSeller } from "@/lib/products";
-import { fetchLikedProductIds } from "@/lib/likes";
+import { fetchLikedProductIds, fetchMyLikedProducts } from "@/lib/likes";
 import {
   ChatIcon,
   CheckIcon,
@@ -22,7 +22,6 @@ export const metadata: Metadata = { title: "내 만물창고 · 만물마켓" };
 
 /** 아직 만들지 않은 다음 단계 기능들 */
 const COMING_SOON = [
-  { title: "찜한 물건", desc: "마음에 담아 둔 물건들", icon: HeartIcon, tone: "bg-berry-soft text-berry-ink" },
   { title: "채팅", desc: "이웃과 주고받은 이야기", icon: ChatIcon, tone: "bg-sky-soft text-sky-ink" },
 ];
 
@@ -61,6 +60,9 @@ export default async function MyPage({
   );
   const sellingCount = myProducts.filter((p) => p.status === "selling").length;
   const soldCount = myProducts.filter((p) => p.status === "sold").length;
+
+  // 내가 찜해 둔 물건 (최근에 찜한 순서)
+  const likedProducts = await fetchMyLikedProducts(user.id);
 
   const nickname = profile?.nickname ?? user.email?.split("@")[0] ?? "만물이";
   const avatarKey = (profile?.avatar_key ?? "orange") as CatColorKey;
@@ -178,6 +180,55 @@ export default async function MyPage({
               <li key={p.id} className="flex">
                 <div className="w-full">
                   <ProductCard product={p} liked={likedIds.has(p.id)} isLoggedIn />
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
+
+      {/* 내가 찜한 물건 */}
+      <section className="mt-12">
+        <div className="mb-4 flex items-end justify-between gap-4">
+          <div>
+            <h2 className="flex items-center gap-2 text-[1.6rem] text-ink">
+              <HeartIcon size={20} className="text-berry" fill="currentColor" />
+              내가 찜한 물건
+            </h2>
+            <p className="mt-1 text-sm text-ink-soft">
+              {likedProducts.length > 0
+                ? "하트를 다시 누르면 목록에서 빠져요."
+                : "마음에 드는 물건에 하트를 눌러 두면 여기에 모여요."}
+            </p>
+          </div>
+          {likedProducts.length > 0 && (
+            <span className="chip shrink-0 bg-berry-soft text-berry-ink">
+              <span className="tabular">{likedProducts.length}</span>개
+            </span>
+          )}
+        </div>
+
+        {likedProducts.length === 0 ? (
+          <div className="rounded-blob border border-dashed border-sand-300 bg-paper px-6 py-14 text-center">
+            <CatFace size={92} color="gray" mood="sleepy" className="mx-auto animate-float" />
+            <p className="mt-4 text-xl text-ink">아직 찜한 물건이 없어요</p>
+            <p className="mt-1.5 text-sm text-ink-soft">
+              구경하다가 마음에 들면 사진 위 하트를 눌러 보세요.
+            </p>
+            <Link
+              href="/products"
+              className="btn-squish btn-primary mt-6 inline-flex rounded-xl px-5 py-3 text-[15px] font-bold"
+            >
+              만물 구경하러 가기
+            </Link>
+          </div>
+        ) : (
+          <ul className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+            {likedProducts.map((p) => (
+              <li key={p.id} className="flex">
+                <div className="w-full">
+                  {/* 이 목록에 있다는 건 이미 찜한 것이므로 liked 는 항상 true */}
+                  <ProductCard product={p} liked isLoggedIn />
                 </div>
               </li>
             ))}
