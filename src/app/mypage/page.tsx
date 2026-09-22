@@ -5,7 +5,8 @@ import { createClient } from "@/lib/supabase/server";
 import { signOutAction } from "@/lib/auth-actions";
 import { CAT_COLORS, CatFace, PawPrint, type CatColorKey } from "@/components/CatArtwork";
 import { ProductCard } from "@/components/products/ProductCard";
-import type { ProductWithSeller } from "@/lib/products";
+import { PRODUCT_SELECT, type ProductWithSeller } from "@/lib/products";
+import { fetchLikedProductIds } from "@/lib/likes";
 import {
   ChatIcon,
   CheckIcon,
@@ -49,11 +50,15 @@ export default async function MyPage({
   // 내가 올린 물건
   const { data: myProductsData } = await supabase
     .from("mm_products")
-    .select("*, seller:mm_profiles(id, nickname, avatar_key, region)")
+    .select(PRODUCT_SELECT)
     .eq("seller_id", user.id)
     .order("created_at", { ascending: false });
 
   const myProducts = (myProductsData ?? []) as ProductWithSeller[];
+  const likedIds = await fetchLikedProductIds(
+    user.id,
+    myProducts.map((p) => p.id),
+  );
   const sellingCount = myProducts.filter((p) => p.status === "selling").length;
   const soldCount = myProducts.filter((p) => p.status === "sold").length;
 
@@ -172,7 +177,7 @@ export default async function MyPage({
             {myProducts.map((p) => (
               <li key={p.id} className="flex">
                 <div className="w-full">
-                  <ProductCard product={p} />
+                  <ProductCard product={p} liked={likedIds.has(p.id)} isLoggedIn />
                 </div>
               </li>
             ))}

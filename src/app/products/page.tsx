@@ -4,8 +4,10 @@ import { createClient } from "@/lib/supabase/server";
 import {
   CATEGORY_KEYS,
   categoryLabel,
+  PRODUCT_SELECT,
   type ProductWithSeller,
 } from "@/lib/products";
+import { fetchLikedProductIds } from "@/lib/likes";
 import { ProductCard } from "@/components/products/ProductCard";
 import { ProductFilters } from "@/components/products/ProductFilters";
 import { CatFace, PawPrint } from "@/components/CatArtwork";
@@ -38,7 +40,7 @@ export default async function ProductsPage({
 
   let query = supabase
     .from("mm_products")
-    .select("*, seller:mm_profiles(id, nickname, avatar_key, region)")
+    .select(PRODUCT_SELECT)
     .limit(PAGE_SIZE);
 
   if (category) query = query.eq("category", category);
@@ -50,6 +52,15 @@ export default async function ProductsPage({
 
   const { data, error } = await query;
   const products = (data ?? []) as ProductWithSeller[];
+
+  // 로그인한 사람이면, 이 목록 중 내가 찜해 둔 글을 한 번에 확인합니다.
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  const likedIds = await fetchLikedProductIds(
+    user?.id,
+    products.map((p) => p.id),
+  );
 
   return (
     <div className="mx-auto max-w-6xl px-5 py-10">
@@ -134,7 +145,11 @@ export default async function ProductsPage({
           {products.map((p) => (
             <li key={p.id} className="flex">
               <div className="w-full">
-                <ProductCard product={p} />
+                <ProductCard
+                  product={p}
+                  liked={likedIds.has(p.id)}
+                  isLoggedIn={Boolean(user)}
+                />
               </div>
             </li>
           ))}

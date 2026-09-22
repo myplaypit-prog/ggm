@@ -1,6 +1,12 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
-import { CATEGORIES, type CategoryKey, type ProductWithSeller } from "@/lib/products";
+import {
+  CATEGORIES,
+  PRODUCT_SELECT,
+  type CategoryKey,
+  type ProductWithSeller,
+} from "@/lib/products";
+import { fetchLikedProductIds } from "@/lib/likes";
 import { ProductCard } from "@/components/products/ProductCard";
 import { CatFace, CatWithBox, PawPrint } from "@/components/CatArtwork";
 import {
@@ -82,7 +88,7 @@ export default async function HomePage({
   const [recentRes, productCountRes, memberCountRes] = await Promise.all([
     supabase
       .from("mm_products")
-      .select("*, seller:mm_profiles(id, nickname, avatar_key, region)")
+      .select(PRODUCT_SELECT)
       .order("created_at", { ascending: false })
       .limit(8),
     supabase.from("mm_products").select("id", { count: "exact", head: true }),
@@ -92,6 +98,12 @@ export default async function HomePage({
   const recent = (recentRes.data ?? []) as ProductWithSeller[];
   const productCount = productCountRes.count ?? 0;
   const memberCount = memberCountRes.count ?? 0;
+
+  // 이 목록 중 내가 찜해 둔 글이 뭔지 한 번에 물어봅니다.
+  const likedIds = await fetchLikedProductIds(
+    user?.id,
+    recent.map((p) => p.id),
+  );
 
   return (
     <>
@@ -263,7 +275,11 @@ export default async function HomePage({
             {recent.map((p) => (
               <li key={p.id} className="flex">
                 <div className="w-full">
-                  <ProductCard product={p} />
+                  <ProductCard
+                    product={p}
+                    liked={likedIds.has(p.id)}
+                    isLoggedIn={Boolean(user)}
+                  />
                 </div>
               </li>
             ))}

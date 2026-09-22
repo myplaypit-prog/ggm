@@ -9,9 +9,13 @@ import {
   formatPrice,
   formatRelativeTime,
   statusBadge,
+  likeCount,
+  PRODUCT_SELECT,
   statusLabel,
   type ProductWithSeller,
 } from "@/lib/products";
+import { fetchLikedProductIds } from "@/lib/likes";
+import { LikeButton } from "@/components/products/LikeButton";
 import { ProductGallery } from "@/components/products/ProductGallery";
 import { StatusSelect } from "@/components/products/StatusSelect";
 import { DeleteProductButton } from "@/components/products/DeleteProductButton";
@@ -19,11 +23,9 @@ import { ProductCard } from "@/components/products/ProductCard";
 import { CatFace, PawPrint, type CatColorKey } from "@/components/CatArtwork";
 import { ChatIcon, CheckIcon, HeartIcon, PinIcon, SparkleIcon } from "@/components/Icons";
 
-const SELECT = "*, seller:mm_profiles(id, nickname, avatar_key, region)";
-
 async function getProduct(id: string) {
   const supabase = await createClient();
-  const { data } = await supabase.from("mm_products").select(SELECT).eq("id", id).maybeSingle();
+  const { data } = await supabase.from("mm_products").select(PRODUCT_SELECT).eq("id", id).maybeSingle();
   return (data as ProductWithSeller | null) ?? null;
 }
 
@@ -52,7 +54,7 @@ export default async function ProductDetailPage({
     data: { user },
   } = await supabase.auth.getUser();
 
-  const { data } = await supabase.from("mm_products").select(SELECT).eq("id", id).maybeSingle();
+  const { data } = await supabase.from("mm_products").select(PRODUCT_SELECT).eq("id", id).maybeSingle();
   const product = data as ProductWithSeller | null;
 
   if (!product) notFound();
@@ -62,11 +64,20 @@ export default async function ProductDetailPage({
   // 같은 판매자의 다른 물건
   const { data: others } = await supabase
     .from("mm_products")
-    .select(SELECT)
+    .select(PRODUCT_SELECT)
     .eq("seller_id", product.seller_id)
     .neq("id", product.id)
     .order("created_at", { ascending: false })
     .limit(4);
+
+  const otherProducts = (others ?? []) as ProductWithSeller[];
+
+  // 이 글과 아래 "다른 물건" 까지 한 번에 찜 여부를 확인합니다.
+  const likedIds = await fetchLikedProductIds(user?.id, [
+    product.id,
+    ...otherProducts.map((p) => p.id),
+  ]);
+  const iLiked = likedIds.has(product.id);
 
   return (
     <div className="mx-auto max-w-5xl px-5 py-8">
@@ -119,11 +130,21 @@ export default async function ProductDetailPage({
             {formatPrice(product.price)}
           </p>
 
-          <p className="mt-2 flex items-center gap-1.5 text-sm text-ink-soft">
+          <p className="mt-2 flex flex-wrap items-center gap-1.5 text-sm text-ink-soft">
             <PinIcon size={15} />
             {product.region}
             <span className="text-ink-soft/50">·</span>
             {formatRelativeTime(product.created_at)}
+            {/* 찜 개수는 글 주인도 봐야 해서 버튼과 따로 여기에도 적습니다 */}
+            {likeCount(product) > 0 && (
+              <>
+                <span className="text-ink-soft/50">·</span>
+                <span className="inline-flex items-center gap-1 font-semibold text-berry-ink">
+                  <HeartIcon size={14} fill="currentColor" />
+                  <span className="tabular">{likeCount(product)}</span>명이 찜했어요
+                </span>
+              </>
+            )}
           </p>
 
           {/* 판매자 */}
@@ -174,14 +195,14 @@ export default async function ProductDetailPage({
                   <ChatIcon size={19} />
                   채팅하기 (준비 중)
                 </button>
-                <button
-                  type="button"
-                  disabled
-                  className="flex cursor-not-allowed items-center justify-center gap-2 rounded-xl border border-sand-200 bg-paper px-5 py-3.5 text-[15px] font-bold text-ink-faint"
-                  title="다음 단계에서 만들 기능이에요"
-                >
-                  <HeartIcon size={19} />찜
-                </button>
+                <LikeButton
+                  productId={product.id}
+                  initialLiked={iLiked}
+                  initialCount={likeCount(product)}
+                  isLoggedIn={Boolean(user)}
+                  variant="full"
+                  className="w-full sm:w-auto sm:min-w-[9rem]"
+                />
               </div>
             )}
           </div>
@@ -202,17 +223,21 @@ export default async function ProductDetailPage({
       </section>
 
       {/* 같은 판매자의 다른 물건 */}
-      {others && others.length > 0 && (
+      {otherProducts.length > 0 && (
         <section className="mt-14">
           <h2 className="mb-4 flex items-center gap-2 font-display text-2xl text-ink">
             <PawPrint size={22} className="text-carrot-400" />
             {product.seller?.nickname}님의 다른 물건
           </h2>
           <ul className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-            {(others as ProductWithSeller[]).map((p) => (
+            {otherProducts.map((p) => (
               <li key={p.id} className="flex">
                 <div className="w-full">
-                  <ProductCard product={p} />
+                  <ProductCard
+                    product={p}
+                    liked={likedIds.has(p.id)}
+                    isLoggedIn={Boolean(user)}
+                  />
                 </div>
               </li>
             ))}

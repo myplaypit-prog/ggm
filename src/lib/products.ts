@@ -91,7 +91,32 @@ export type Product = {
   updated_at: string;
 };
 
-export type ProductWithSeller = Product & { seller: ProductSeller | null };
+export type ProductWithSeller = Product & {
+  seller: ProductSeller | null;
+  /**
+   * 찜 개수.
+   * Supabase 가 `likes:mm_likes(count)` 요청에 [{ count: 3 }] 모양으로 답해 줍니다.
+   */
+  likes?: { count: number }[] | null;
+};
+
+/* ── 상품을 불러올 때 함께 가져오는 것들 ──────────────
+   판매자 정보와 찜 개수를 매번 손으로 적으면 빠뜨리기 쉬워서
+   한 군데에 모아 두고 모든 화면이 이걸 씁니다.
+
+   `mm_profiles!mm_products_seller_id_fkey` 처럼 길게 적은 이유:
+   찜 테이블(mm_likes)이 상품과 프로필 양쪽을 가리키게 되면서,
+   "상품 → 프로필" 로 가는 길이 두 갈래가 됐습니다.
+     ① 상품의 seller_id 를 따라가기 (우리가 원하는 길)
+     ② 찜 테이블을 거쳐 "이 글을 찜한 사람들" 로 가기
+   그래서 어느 길인지 제약조건 이름으로 못 박아 줍니다. */
+export const PRODUCT_SELECT =
+  "*, seller:mm_profiles!mm_products_seller_id_fkey(id, nickname, avatar_key, region), likes:mm_likes(count)";
+
+/** 찜 개수 꺼내기 (없으면 0) */
+export function likeCount(product: Pick<ProductWithSeller, "likes">) {
+  return product.likes?.[0]?.count ?? 0;
+}
 
 /* ── 표시용 변환 ──────────────────────────────────────── */
 
