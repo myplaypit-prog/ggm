@@ -218,7 +218,7 @@ src/
 │     ├─ callback/route.ts  이메일 인증 링크 처리
 │     └─ auth-error/        인증 실패 안내
 ├─ components/
-│  ├─ CatMascot.tsx         🐱 고양이 SVG (얼굴 5색 × 표정 4종 + 히어로 일러스트 + 발자국)
+│  ├─ CatArtwork.tsx        🐱 고양이 일러스트 (public/illustrations 의 PNG 5종 + 히어로 + 발자국)
 │  ├─ Icons.tsx             ✏️ 아이콘 모음 (기본 + 카테고리)
 │  ├─ Header.tsx            로그인 상태에 따라 바뀌는 헤더
 │  ├─ Footer.tsx
